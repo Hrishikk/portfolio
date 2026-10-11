@@ -39,6 +39,6 @@ export const ui = {
     languages: { en: 'Languages', ja: '語学' },
     earned: { en: 'Earned', ja: '取得済み' },
     inProgress: { en: 'In progress', ja: '学習中' },
-    builtWith: { en: 'Built with React, Node.js — and Claude Code.', ja: 'React・Node.js、そしてClaude Codeで構築。' },
+    builtWith: { en: 'Built with React and TypeScript — and Claude Code.', ja: 'React・TypeScript、そしてClaude Codeで構築。' },
   },
 } satisfies Record<string, Record<string, Localized | { kanji: string; title: Localized }>>;
