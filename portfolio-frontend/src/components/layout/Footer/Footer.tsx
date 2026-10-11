@@ -50,7 +50,6 @@ export function Footer() {
             <span className={styles.dot} aria-hidden="true">
               ・
             </span>
-            <span>{t(ui.labels.builtWith)}</span>
           </p>
           <a className={styles.top} href="#home">
             <span aria-hidden="true">↑</span> {t(ui.actions.backToTop)}

@@ -24,7 +24,7 @@ export const profile: Profile = {
       '現在はチームリーダーとして開発チームを率いながら、日々コードを書いています。日本語と英語の両方で業務ができるため、お客様とエンジニアの間で仕様を明確に保つことができます。',
     ],
   },
-  location: { en: 'Ibaraki, Japan', ja: '茨城県' },
+  location: { en: 'Tsuchiura, Ibaraki, Japan', ja: '茨城県土浦市' },
   photoAlt: {
     en: 'Portrait of Hrishikesh',
     ja: 'リシケシュの写真',
@@ -45,7 +45,7 @@ export const profile: Profile = {
     {
       id: 'location',
       label: { en: 'Location', ja: '所在地' },
-      value: 'Ibaraki, Japan',
+      value: 'Tsuchiura, Ibaraki, Japan',
     },
   ],
 };
