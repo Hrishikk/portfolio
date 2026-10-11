@@ -25,8 +25,8 @@
 }
 
 .card {
-  --accent: var(--color-vermilion);
-  --accent-soft: var(--color-vermilion-soft);
+  --accent: var(--color-accent);
+  --accent-soft: var(--color-accent-soft);
   position: relative;
   overflow: hidden;
   flex: 1;
@@ -36,7 +36,6 @@
   padding: var(--space-5);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: 4px solid var(--accent);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   transition: transform var(--duration) var(--ease-out), box-shadow var(--duration) var(--ease-out);
@@ -44,26 +43,10 @@
 
 .card:hover {
   transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-stamp);
+  box-shadow: var(--shadow-card);
 }
 
-.vermilion { --accent: var(--color-vermilion); --accent-soft: var(--color-vermilion-soft); }
-.indigo { --accent: var(--color-indigo); --accent-soft: var(--color-indigo-soft); }
-.matcha { --accent: var(--color-matcha); --accent-soft: var(--color-matcha-soft); }
-.gold { --accent: var(--color-gold); --accent-soft: var(--color-gold-soft); }
 
-.cardKanji {
-  position: absolute;
-  top: var(--space-2);
-  right: var(--space-3);
-  font-family: var(--font-display);
-  font-size: 4rem;
-  line-height: 1;
-  color: var(--accent);
-  opacity: 0.1;
-  pointer-events: none;
-  user-select: none;
-}
 
 .cardTitle {
   margin: 0;

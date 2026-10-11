@@ -1,14 +1,13 @@
-/* 名刺 — business card */
+/* Business card */
 .card {
   position: relative;
   overflow: hidden;
   padding: var(--space-6);
-  border: 2px solid var(--color-border-strong);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   background:
-    linear-gradient(90deg, var(--color-vermilion) 0 6px, transparent 6px),
     var(--color-surface);
-  box-shadow: var(--shadow-stamp);
+  box-shadow: var(--shadow-card);
 }
 
 .cardTop {
@@ -42,10 +41,6 @@
   color: var(--color-ink-soft);
 }
 
-.cardSeal {
-  flex: none;
-  margin-top: var(--space-1);
-}
 
 .directHeading {
   margin-bottom: var(--space-3);
@@ -96,28 +91,16 @@
 
 a.linkValue {
   text-decoration: underline;
-  text-decoration-color: var(--color-vermilion);
+  text-decoration-color: var(--color-accent);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
   transition: color 160ms var(--ease-out);
 }
 
 a.linkValue:hover {
-  color: var(--color-vermilion);
+  color: var(--color-accent);
 }
 
-.cardKanji {
-  position: absolute;
-  right: var(--space-3);
-  bottom: calc(-1 * var(--space-4));
-  font-family: var(--font-display);
-  font-size: 7rem;
-  line-height: 1;
-  color: var(--color-ink);
-  opacity: 0.05;
-  pointer-events: none;
-  user-select: none;
-}
 
 @media (max-width: 480px) {
   .card {

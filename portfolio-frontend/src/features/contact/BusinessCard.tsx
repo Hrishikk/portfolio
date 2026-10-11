@@ -1,7 +1,6 @@
 import type { ComponentType } from 'react';
-import { Seal } from '@/components/ui';
+import { Monogram } from '@/components/ui';
 import { profile } from '@/content';
-import { ui } from '@/i18n/ui';
 import { useLanguage } from '@/i18n/useLanguage';
 import type { ContactLink } from '@/types/content';
 import { copy } from './copy';
@@ -16,21 +15,23 @@ const ICONS: Record<ContactLink['id'], ComponentType> = {
 
 const isExternal = (href?: string) => Boolean(href && /^https?:/.test(href));
 
-/** 名刺-style business card with name, role and contact details. */
+/** Business card with name, role and contact details. */
 export function BusinessCard() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <article className={styles.card} aria-label={t(copy.cardLabel)}>
       <div className={styles.cardTop}>
         <div>
-          <p className={styles.cardKana} lang="ja">
-            {profile.nameKana}
-          </p>
+          {locale === 'ja' && (
+            <p className={styles.cardKana} lang="ja">
+              {profile.nameKana}
+            </p>
+          )}
           <p className={styles.cardName}>{profile.name}</p>
           <p className={styles.cardRole}>{t(profile.headline)}</p>
         </div>
-        <Seal text={profile.seal} size="md" className={styles.cardSeal} />
+        <Monogram size="md" />
       </div>
 
       <h3 className={styles.directHeading}>{t(copy.detailsHeading)}</h3>
@@ -60,9 +61,6 @@ export function BusinessCard() {
           );
         })}
       </ul>
-      <span className={styles.cardKanji} aria-hidden="true">
-        {ui.sections.contact.kanji}
-      </span>
     </article>
   );
 }

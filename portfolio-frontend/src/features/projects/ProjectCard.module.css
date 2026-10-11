@@ -1,4 +1,6 @@
 .card {
+  --accent: var(--color-accent);
+  --accent-soft: var(--color-accent-soft);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -6,8 +8,7 @@
   height: 100%;
   padding: var(--space-5);
   overflow: hidden;
-  border: 2px solid var(--color-border-strong);
-  border-top: 6px solid var(--accent);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
   transition:
@@ -17,8 +18,8 @@
 
 .card:hover,
 .card:focus-within {
-  transform: translate(-3px, -3px);
-  box-shadow: var(--shadow-stamp);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
 }
 
 @media (min-width: 640px) {
@@ -27,18 +28,6 @@
   }
 }
 
-.number {
-  position: absolute;
-  top: var(--space-2);
-  right: var(--space-4);
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  font-weight: 800;
-  line-height: 1;
-  color: var(--accent-soft);
-  pointer-events: none;
-  user-select: none;
-}
 
 .header {
   position: relative;

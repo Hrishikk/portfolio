@@ -21,17 +21,24 @@ export interface ContactLink {
 
 export interface Profile {
   name: string;
-  /** Katakana reading of the name, used as a decorative vertical label. */
+  /** Katakana reading of the name (shown in Japanese mode only). */
   nameKana: string;
-  /** Short initials-style seal text (hanko). */
-  seal: string;
   headline: Localized;
-  roles: Localized[];
+  /** Core technologies shown under the hero headline. */
+  coreStack: string[];
   tagline: Localized;
   summary: LocalizedList;
   location: Localized;
-  availability: Localized;
+  photoAlt: Localized;
   contacts: ContactLink[];
+}
+
+/** A development area highlighted in the About section. */
+export interface Strength {
+  id: 'frontend' | 'backend' | 'cloud';
+  title: Localized;
+  description: Localized;
+  tools: string[];
 }
 
 export interface Metric {
@@ -69,8 +76,6 @@ export interface Project {
   solution: Localized;
   outcomes: LocalizedList;
   stack: string[];
-  /** Accent token name used for the project card. */
-  accent: 'vermilion' | 'indigo' | 'matcha' | 'gold';
 }
 
 export interface SkillItem {
@@ -84,28 +89,6 @@ export interface SkillGroup {
   title: Localized;
   description: Localized;
   items: SkillItem[];
-}
-
-export interface AiTool {
-  id: 'copilot' | 'claude-code';
-  name: string;
-  vendor: string;
-  tagline: Localized;
-  useCases: LocalizedList;
-}
-
-export interface AiWorkflowStep {
-  id: string;
-  title: Localized;
-  description: Localized;
-  tool: Array<AiTool['id']>;
-}
-
-export interface AiExperience {
-  intro: Localized;
-  tools: AiTool[];
-  workflow: AiWorkflowStep[];
-  principles: Array<{ id: string; title: Localized; description: Localized }>;
 }
 
 export interface Certification {
@@ -139,6 +122,5 @@ export type SectionId =
   | 'experience'
   | 'projects'
   | 'skills'
-  | 'ai'
   | 'certifications'
   | 'contact';

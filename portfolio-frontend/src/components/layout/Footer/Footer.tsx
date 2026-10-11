@@ -1,4 +1,4 @@
-import { Seal } from '@/components/ui';
+import { Monogram } from '@/components/ui';
 import { profile } from '@/content';
 import { ui } from '@/i18n/ui';
 import { useLanguage } from '@/i18n/useLanguage';
@@ -20,12 +20,10 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.identity}>
-          <Seal text={profile.seal} size="md" />
+          <Monogram size="md" />
           <div>
             <p className={styles.name}>{profile.name}</p>
-            <p className={styles.kana} lang="ja">
-              {profile.nameKana}
-            </p>
+            <p className={styles.role}>{t(profile.headline)}</p>
           </div>
         </div>
 

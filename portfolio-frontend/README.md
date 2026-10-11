@@ -33,13 +33,14 @@ npm run dev          # http://localhost:5173
 ```
 src/
   app/                App.tsx (page composition) and AppProviders.tsx
+  assets/             profile.jpg (hero photo)
   content/            Typed bilingual content: edit these files to change the text
   types/content.ts    Content model
   i18n/               LanguageProvider, useLanguage, ui.ts (shared labels)
   theme/              ThemeProvider, useTheme
-  components/ui/      Section, Reveal, Tag, Seal, Button
+  components/ui/      Section, Reveal, Tag, Monogram, Button
   components/layout/  Navbar, Footer
-  features/           hero, about, experience, projects, skills, ai, certifications, contact
+  features/           hero, about, experience, projects, skills, certifications, contact
   hooks/              useInView, useActiveSection
   services/           storage.ts (safe localStorage helpers)
   styles/             tokens.css (design tokens), global.css

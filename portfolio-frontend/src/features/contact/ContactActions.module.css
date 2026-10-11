@@ -12,40 +12,43 @@
   width: 100%;
   min-height: 72px;
   padding: var(--space-4) var(--space-5);
-  border: 2px solid var(--color-border-strong);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
   color: var(--color-ink);
   text-align: left;
   text-decoration: none;
-  box-shadow: 4px 4px 0 var(--color-border-strong);
+  box-shadow: var(--shadow-card);
   transition:
     transform 160ms var(--ease-out),
     box-shadow 160ms var(--ease-out);
 }
 
 .action:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--color-border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .action:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--color-border-strong);
+  transform: none;
+  box-shadow: none;
 }
 
 .primary {
-  background: var(--color-ink);
-  color: var(--color-bg);
-  box-shadow: 4px 4px 0 var(--color-accent);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: var(--shadow-card);
 }
 
 .primary:hover {
-  box-shadow: 6px 6px 0 var(--color-accent);
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .primary:active {
-  box-shadow: 1px 1px 0 var(--color-accent);
+  box-shadow: none;
 }
 
 .icon {
@@ -59,7 +62,7 @@
 }
 
 .primary .icon {
-  background: var(--color-accent);
+  background: rgb(255 255 255 / 0.18);
   color: var(--color-on-accent);
 }
 

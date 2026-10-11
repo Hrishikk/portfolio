@@ -17,7 +17,7 @@
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-indigo), var(--color-vermilion));
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent));
   color: var(--color-on-accent);
   font-size: var(--text-xs);
   font-weight: 800;

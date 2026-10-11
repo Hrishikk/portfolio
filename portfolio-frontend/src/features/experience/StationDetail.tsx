@@ -1,5 +1,5 @@
 import type { CareerStation } from '@/types/content';
-import { Seal, Tag } from '@/components/ui';
+import { Tag } from '@/components/ui';
 import { useLanguage } from '@/i18n/useLanguage';
 import { ui } from '@/i18n/ui';
 import { copy } from './copy';
@@ -29,10 +29,7 @@ export function StationDetail({ station, code, compact = false }: StationDetailP
             <h3 className={styles.role}>{t(station.role)}</h3>
           </div>
           {station.kind === 'promotion' && (
-            <span className={styles.promo}>
-              <Seal text="昇進" size="sm" />
-              <span className={styles.promoText}>{t(copy.promoted)}</span>
-            </span>
+            <Tag tone="accent">{t(copy.promoted)}</Tag>
           )}
           {station.kind === 'current' && <Tag tone="accent">{t(copy.youAreHere)}</Tag>}
         </header>
@@ -72,7 +69,7 @@ export function StationDetail({ station, code, compact = false }: StationDetailP
             <ul className={styles.tags}>
               {station.phases.map((phase) => (
                 <li key={phase.en}>
-                  <Tag tone="indigo">{t(phase)}</Tag>
+                  <Tag>{t(phase)}</Tag>
                 </li>
               ))}
             </ul>

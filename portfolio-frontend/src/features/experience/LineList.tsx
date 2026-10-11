@@ -15,7 +15,7 @@ interface LineListProps {
   initialOpenId: string;
 }
 
-/** Mobile: vertical metro line. Each station is a disclosure; details open inline beneath it. */
+/** Mobile: vertical timeline. Each station is a disclosure; details open inline beneath it. */
 export function LineList({ stations, initialOpenId }: LineListProps) {
   const { t, locale } = useLanguage();
   const [openIds, setOpenIds] = useState<ReadonlySet<string>>(() => new Set([initialOpenId]));
@@ -54,7 +54,7 @@ export function LineList({ stations, initialOpenId }: LineListProps) {
                 <span className={styles.text}>
                   {(station.kind === 'current' || station.kind === 'promotion') && (
                     <span className={station.kind === 'current' ? styles.flagNow : styles.flagPromo}>
-                      {station.kind === 'current' ? t(copy.youAreHere) : t(copy.promotedFlag)}
+                      {station.kind === 'current' ? t(copy.youAreHere) : t(copy.promoted)}
                     </span>
                   )}
                   <span className={styles.name}>{t(station.title)}</span>

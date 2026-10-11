@@ -8,7 +8,7 @@
 }
 
 .item {
-  --station-color: color-mix(in oklab, var(--color-vermilion) var(--growth, 0%), var(--color-indigo));
+  --station-color: color-mix(in oklab, var(--color-accent) var(--growth, 0%), var(--color-accent));
   position: relative;
   padding: 0 0 var(--space-4) calc(var(--rail-x) * 2 + var(--space-2));
 }
@@ -53,7 +53,7 @@
   gap: var(--space-3);
   width: 100%;
   padding: var(--space-3);
-  border: 2px solid var(--color-border-strong);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
   color: inherit;
@@ -66,7 +66,7 @@
 }
 
 .toggle[aria-expanded='true'] {
-  border-top: 5px solid var(--station-color);
+  border-top: 3px solid var(--station-color);
   border-radius: var(--radius-md) var(--radius-md) 0 0;
   box-shadow: none;
 }
@@ -94,13 +94,13 @@
 
 .flagNow {
   color: var(--color-on-accent);
-  background: var(--color-vermilion);
+  background: var(--color-accent);
 }
 
 .flagPromo {
-  color: var(--color-vermilion);
-  border: 1.5px solid var(--color-vermilion);
-  background: var(--color-vermilion-soft);
+  color: var(--color-accent);
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-accent-soft);
 }
 
 .name {
@@ -135,11 +135,11 @@
 
 .body {
   padding: var(--space-4);
-  border: 2px solid var(--color-border-strong);
+  border: 1px solid var(--color-border);
   border-top: 0;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-surface);
-  box-shadow: var(--shadow-stamp);
+  box-shadow: var(--shadow-card);
 }
 
 .body[hidden] {

@@ -1,7 +1,6 @@
 import { Footer } from '@/components/layout/Footer/Footer';
 import { Navbar } from '@/components/layout/Navbar/Navbar';
 import { About } from '@/features/about/About';
-import { AiExperience } from '@/features/ai/AiExperience';
 import { Certifications } from '@/features/certifications/Certifications';
 import { Contact } from '@/features/contact/Contact';
 import { Experience } from '@/features/experience/Experience';
@@ -23,7 +22,6 @@ export function App() {
         <Experience />
         <Projects />
         <Skills />
-        <AiExperience />
         <Certifications />
         <Contact />
       </main>
