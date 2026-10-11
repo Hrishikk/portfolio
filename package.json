@@ -1,0 +1,18 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "description": "Portfolio of Karikkad Kayarthaya Hrishikesh — React frontend + Node.js backend (monorepo)",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "install:all": "npm --prefix portfolio-frontend install && npm --prefix portfolio-backend install",
+    "dev:frontend": "npm --prefix portfolio-frontend run dev",
+    "dev:backend": "npm --prefix portfolio-backend run dev",
+    "build": "npm --prefix portfolio-frontend run build && npm --prefix portfolio-backend run build",
+    "start": "NODE_ENV=production npm --prefix portfolio-backend start",
+    "test": "npm --prefix portfolio-backend test",
+    "lint": "npm --prefix portfolio-frontend run lint",
+    "typecheck": "npm --prefix portfolio-frontend run typecheck && npm --prefix portfolio-backend run typecheck"
+  }
+}
