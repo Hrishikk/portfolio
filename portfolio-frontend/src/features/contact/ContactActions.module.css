@@ -1,0 +1,106 @@
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.action {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 72px;
+  padding: var(--space-4) var(--space-5);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  text-align: left;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--color-border-strong);
+  transition:
+    transform 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out);
+}
+
+.action:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-border-strong);
+}
+
+.action:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--color-border-strong);
+}
+
+.primary {
+  background: var(--color-ink);
+  color: var(--color-bg);
+  box-shadow: 4px 4px 0 var(--color-accent);
+}
+
+.primary:hover {
+  box-shadow: 6px 6px 0 var(--color-accent);
+}
+
+.primary:active {
+  box-shadow: 1px 1px 0 var(--color-accent);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.primary .icon {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  font-weight: 700;
+  font-size: var(--text-base);
+}
+
+.detail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  opacity: 0.75;
+}
+
+.trailing {
+  display: grid;
+  place-items: center;
+  opacity: 0.7;
+}
+
+.status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .action {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+}

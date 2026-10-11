@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "description": "Portfolio of Karikkad Kayarthaya Hrishikesh — React + TypeScript static site",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "install:all": "npm --prefix portfolio-frontend install",
+    "dev": "npm --prefix portfolio-frontend run dev",
+    "build": "npm --prefix portfolio-frontend run build",
+    "preview": "npm --prefix portfolio-frontend run preview",
+    "lint": "npm --prefix portfolio-frontend run lint",
+    "typecheck": "npm --prefix portfolio-frontend run typecheck"
+  }
+}

@@ -1,0 +1,58 @@
+.marker {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 5px solid var(--station-color, var(--color-indigo));
+  border-radius: 50%;
+  background: var(--color-surface-raised);
+  transition:
+    transform var(--duration) var(--ease-out),
+    box-shadow var(--duration) var(--ease-out);
+}
+
+/* Promotion = interchange-style double ring. */
+.promotion {
+  box-shadow:
+    0 0 0 3px var(--color-surface-raised),
+    0 0 0 5px var(--color-vermilion);
+}
+
+.current {
+  border-color: var(--color-vermilion);
+  background: var(--color-vermilion);
+}
+
+.selected {
+  transform: scale(1.25);
+}
+
+.pulse {
+  position: absolute;
+  inset: -9px;
+  border-radius: 50%;
+  border: 2px solid var(--color-vermilion);
+  animation: pulse 1.8s var(--ease-out) infinite;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+    opacity: 0.5;
+  }
+  .marker {
+    transition: none;
+  }
+}

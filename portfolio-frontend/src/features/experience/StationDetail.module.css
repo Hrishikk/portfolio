@@ -1,0 +1,139 @@
+.detail {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
+
+.headings {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+}
+
+.role {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+.promo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.promoText {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-vermilion);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: 0;
+  padding: var(--space-3) 0;
+  border-block: 1px dashed var(--color-border);
+}
+
+.metaItem {
+  min-width: 0;
+}
+
+.metaItem dt {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.metaItem dd {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.summary {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}
+
+.columns {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 800px) {
+  .columns {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.subhead {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.highlights {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: var(--space-5);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+}
+
+.highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  top: 0.55em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 2px solid var(--station-color, var(--color-indigo));
+  border-radius: 50%;
+}
+
+.tagGroups {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
