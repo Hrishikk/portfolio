@@ -11,7 +11,7 @@ import styles from './Experience.module.css';
 
 const defaultStationId = (career.find((s) => s.kind === 'current') ?? career[career.length - 1])?.id ?? '';
 
-/** Career journey drawn as a Tokyo-Metro-style line map. */
+/** Career journey as an interactive timeline of roles and projects. */
 export function Experience() {
   const { t } = useLanguage();
   const isDesktop = useMediaQuery('(min-width: 800px)');
@@ -20,9 +20,8 @@ export function Experience() {
   return (
     <Section
       id="experience"
-      index="02"
       tone="alt"
-      kanji={ui.sections.experience.kanji}
+      eyebrow={ui.sections.experience.eyebrow}
       title={ui.sections.experience.title}
       lead={copy.lead}
     >

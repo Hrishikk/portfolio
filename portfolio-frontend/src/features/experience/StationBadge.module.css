@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 3px solid var(--station-color, var(--color-indigo));
+  border: 3px solid var(--station-color, var(--color-accent));
   border-radius: var(--radius-sm);
   background: var(--color-surface-raised);
   color: var(--color-ink);

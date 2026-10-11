@@ -1,13 +1,14 @@
-import { education, languages, profile } from '@/content';
+import { career, education, languages, profile } from '@/content';
 import { ui } from '@/i18n/ui';
 import { useLanguage } from '@/i18n/useLanguage';
 import { copy } from './copy';
 import styles from './About.module.css';
 
-/** Side card summarising location, languages, education and contacts. */
+const current = career[career.length - 1];
+
+/** Side card summarising current role, location, languages and education. */
 export function GlanceCard() {
   const { t } = useLanguage();
-  const links = profile.contacts.filter((c) => c.href);
 
   return (
     <aside className={styles.card} aria-labelledby="about-glance">
@@ -15,6 +16,13 @@ export function GlanceCard() {
         {t(copy.atAGlance)}
       </h3>
       <dl className={styles.facts}>
+        <div className={styles.fact}>
+          <dt>{t(copy.currentRole)}</dt>
+          <dd>
+            <strong className={styles.block}>{t(current.role)}</strong>
+            <span className={`${styles.block} ${styles.muted}`}>{current.company}</span>
+          </dd>
+        </div>
         <div className={styles.fact}>
           <dt>{t(copy.location)}</dt>
           <dd>{t(profile.location)}</dd>
@@ -38,25 +46,6 @@ export function GlanceCard() {
             <strong className={styles.block}>{t(education.degree)}</strong>
             <span className={styles.block}>{education.school}</span>
             <span className={`${styles.block} ${styles.muted}`}>{t(education.period)}</span>
-          </dd>
-        </div>
-        <div className={styles.fact}>
-          <dt>{t(copy.contact)}</dt>
-          <dd>
-            <ul className={styles.contactList}>
-              {links.map((c) => (
-                <li key={c.id}>
-                  <a
-                    href={c.href}
-                    className={styles.contactLink}
-                    {...(c.href?.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  >
-                    <span className={styles.muted}>{t(c.label)}</span>
-                    <span>{c.value}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
           </dd>
         </div>
       </dl>

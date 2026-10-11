@@ -6,16 +6,12 @@ import { SkillMeter } from './SkillMeter';
 import { copy } from './copy';
 import styles from './Skills.module.css';
 
-export type SkillAccent = 'vermilion' | 'indigo' | 'matcha' | 'gold';
-
 interface SkillCardProps {
   group: SkillGroup;
-  kanji: string;
-  accent: SkillAccent;
 }
 
 /** A card for one skill group: title, plain-language description, year meters and tags. */
-export function SkillCard({ group, kanji, accent }: SkillCardProps) {
+export function SkillCard({ group }: SkillCardProps) {
   const { t } = useLanguage();
   const { ref, inView } = useInView<HTMLElement>({ threshold: 0.3 });
   const measured = group.items.filter((item) => item.years !== undefined);
@@ -23,10 +19,7 @@ export function SkillCard({ group, kanji, accent }: SkillCardProps) {
   const titleId = `skill-${group.id}-title`;
 
   return (
-    <article ref={ref} className={`${styles.card} ${styles[accent]}`} aria-labelledby={titleId}>
-      <span className={styles.cardKanji} aria-hidden="true">
-        {kanji}
-      </span>
+    <article ref={ref} className={styles.card} aria-labelledby={titleId}>
       <h3 id={titleId} className={styles.cardTitle}>
         {t(group.title)}
       </h3>

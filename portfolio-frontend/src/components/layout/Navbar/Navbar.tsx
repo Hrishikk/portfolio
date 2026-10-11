@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Seal } from '@/components/ui';
-import { navItems, profile } from '@/content';
+import { Monogram } from '@/components/ui';
+import { navItems } from '@/content';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { ui } from '@/i18n/ui';
 import { useLanguage } from '@/i18n/useLanguage';
@@ -81,7 +81,7 @@ export function Navbar() {
     <header className={`${styles.header} ${open ? styles.menuOpen : scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         <a href="#home" className={styles.brand} onClick={close} aria-label={t(copy.home)}>
-          <Seal text={profile.seal} size="sm" />
+          <Monogram />
           <span className={styles.wordmark}>Hrishikesh K K</span>
         </a>
 
@@ -124,9 +124,6 @@ export function Navbar() {
         <nav aria-label={t(copy.mobileNav)}>
           <ol className={styles.mobileList}>{links('mobile')}</ol>
         </nav>
-        <span className={styles.mobileKana} aria-hidden="true">
-          {profile.nameKana}
-        </span>
       </div>
     </header>
   );

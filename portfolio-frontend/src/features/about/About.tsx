@@ -1,31 +1,34 @@
 import { Reveal, Section } from '@/components/ui';
-import { profile } from '@/content';
+import { profile, strengths } from '@/content';
 import { ui } from '@/i18n/ui';
 import { useLanguage } from '@/i18n/useLanguage';
-import { BridgeDiagram } from './BridgeDiagram';
 import { GlanceCard } from './GlanceCard';
+import { StrengthCard } from './StrengthCard';
 import styles from './About.module.css';
 
-/** About section: summary story, Bridge SE explainer and an at-a-glance card. */
+/** About section: summary, core development areas and an at-a-glance card. */
 export function About() {
   const { tl } = useLanguage();
   return (
-    <Section id="about" index="01" kanji={ui.sections.about.kanji} title={ui.sections.about.title}>
+    <Section id="about" eyebrow={ui.sections.about.eyebrow} title={ui.sections.about.title}>
       <div className={styles.layout}>
-        <div className={styles.main}>
-          <Reveal className={styles.summary}>
-            {tl(profile.summary).map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </Reveal>
-          <Reveal delay={120}>
-            <BridgeDiagram />
-          </Reveal>
-        </div>
-        <Reveal delay={200} className={styles.side}>
+        <Reveal className={styles.summary}>
+          {tl(profile.summary).map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </Reveal>
+        <Reveal delay={120} className={styles.side}>
           <GlanceCard />
         </Reveal>
       </div>
+
+      <ul className={styles.strengths}>
+        {strengths.map((strength, i) => (
+          <Reveal as="li" key={strength.id} delay={i * 100}>
+            <StrengthCard strength={strength} />
+          </Reveal>
+        ))}
+      </ul>
     </Section>
   );
 }

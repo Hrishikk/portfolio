@@ -18,7 +18,7 @@ interface LineMapProps {
 const tabId = (id: string) => `station-tab-${id}`;
 const PANEL_ID = 'station-panel';
 
-/** Desktop: horizontal metro line. Stations are tabs (arrow keys move between them); details show below. */
+/** Desktop: horizontal timeline. Stations are tabs (arrow keys move between them); details show below. */
 export function LineMap({ stations, selectedId, onSelect }: LineMapProps) {
   const { t, locale } = useLanguage();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -80,7 +80,7 @@ export function LineMap({ stations, selectedId, onSelect }: LineMapProps) {
             >
               <span className={styles.flagSlot}>
                 {station.kind === 'current' && <span className={styles.flagNow}>{t(copy.youAreHere)}</span>}
-                {station.kind === 'promotion' && <span className={styles.flagPromo}>{t(copy.promotedFlag)}</span>}
+                {station.kind === 'promotion' && <span className={styles.flagPromo}>{t(copy.promoted)}</span>}
                 {station.kind === 'join' && <span className={styles.flagJoin}>{t(copy.joined)}</span>}
               </span>
               <span className={styles.markerRow}>

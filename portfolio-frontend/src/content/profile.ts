@@ -1,39 +1,33 @@
-import type { Metric, Profile } from '@/types/content';
+import type { Metric, Profile, Strength } from '@/types/content';
 
 export const profile: Profile = {
   name: 'Karikkad Kayarthaya Hrishikesh',
   nameKana: 'カリカド・カヤルタヤ・リシケシュ',
-  seal: 'リシ',
   headline: {
-    en: 'Full Stack Engineer & Team Leader',
-    ja: 'フルスタックエンジニア／チームリーダー',
+    en: 'Full Stack Engineer',
+    ja: 'フルスタックエンジニア',
   },
-  roles: [
-    { en: 'React.js / NestJS', ja: 'React.js / NestJS' },
-    { en: 'AWS Cloud & Data Migration', ja: 'AWS クラウド・データ移行' },
-    { en: 'Bilingual Bridge SE', ja: 'バイリンガル ブリッジSE' },
-    { en: 'AI-assisted Development', ja: 'AI 活用開発' },
-  ],
+  coreStack: ['React.js', 'NestJS', 'Node.js', 'TypeScript', 'PostgreSQL', 'AWS'],
   tagline: {
-    en: 'I build enterprise web apps end to end and help Japanese clients and international teams work as one.',
-    ja: '要件定義からリリースまで一貫して開発し、日本のお客様と海外の開発チームの「橋渡し」を担います。',
+    en: 'I design and build enterprise web applications end to end — responsive React front ends, type-safe NestJS and Node.js APIs, and scalable data on AWS.',
+    ja: 'React.jsによるレスポンシブなフロントエンド、NestJS・Node.jsによる型安全なAPI、AWS上のスケーラブルなデータ基盤まで、企業向けWebアプリケーションを一貫して設計・開発しています。',
   },
   summary: {
     en: [
-      'I am a Full Stack Engineer based in Ibaraki, Japan. Since 2024 I have built enterprise web applications with React.js, NestJS and Node.js at VeBuIn Inc.',
-      'In two years I went from Junior Engineer to Team Leader. I led a 7-engineer team through the JAIME system re-architecture, including a 2 TB migration from InfluxDB to Amazon Timestream on AWS, and we kept client satisfaction at 98%.',
-      'I also work as a Bridge SE. I speak with Japanese clients in Japanese and English, turn their needs into clear specifications, and keep rework low. Today I lead requirements, proposals and development for a new Inventory Management System.',
+      'I’m a Full Stack Engineer with 2+ years of experience building enterprise web applications at VeBuIn Inc. I work across the whole stack: React.js and TypeScript on the front end, NestJS and Node.js REST APIs on the back end, and PostgreSQL and AWS for data and infrastructure.',
+      'Recently I re-architected an industrial monitoring platform for AWS serverless and migrated 2 TB of time-series data from InfluxDB to Amazon Timestream. I care about clean, tested code: Jest and Cypress with TDD, Swagger-documented APIs, and type-safe API clients generated with Orval.',
+      'Today I lead a development team as Team Leader while still writing code every day. I work in both English and Japanese, which keeps specifications clear between clients and engineers.',
     ],
     ja: [
-      '茨城県在住のフルスタックエンジニアです。2024年よりVeBuIn株式会社にて、React.js・NestJS・Node.jsを用いた企業向けWebアプリケーション開発に従事しています。',
-      '2年間でジュニアエンジニアからチームリーダーへ昇進。JAIMEシステムのリアーキテクチャでは7名のチームを率い、InfluxDBからAmazon Timestreamへの2TBデータ移行を推進しながら、顧客満足度98%を維持しました。',
-      'ブリッジSEとして日本語・英語で顧客と折衝し、要件を明確な仕様に落とし込むことで手戻りを防いでいます。現在は在庫管理システムの新規開発で、要件定義・提案・開発をリードしています。',
+      'VeBuIn株式会社にて2年以上、企業向けWebアプリケーションを開発しているフルスタックエンジニアです。フロントエンドはReact.jsとTypeScript、バックエンドはNestJS・Node.jsによるREST API、データ・インフラはPostgreSQLとAWSを担当しています。',
+      '直近では産業設備監視プラットフォームをAWSサーバーレス構成へ再構築し、InfluxDBからAmazon Timestreamへ2TBの時系列データを移行しました。JestとCypressによるTDD、SwaggerによるAPIドキュメント、Orvalによる型安全なAPIクライアント生成など、テストされた読みやすいコードを大切にしています。',
+      '現在はチームリーダーとして開発チームを率いながら、日々コードを書いています。日本語と英語の両方で業務ができるため、お客様とエンジニアの間で仕様を明確に保つことができます。',
     ],
   },
   location: { en: 'Tsuchiura, Ibaraki, Japan', ja: '茨城県土浦市' },
-  availability: {
-    en: 'Open to new opportunities in Japan',
-    ja: '新しい挑戦の機会を探しています',
+  photoAlt: {
+    en: 'Portrait of Hrishikesh',
+    ja: 'リシケシュの写真',
   },
   contacts: [
     {
@@ -50,29 +44,38 @@ export const profile: Profile = {
     },
     {
       id: 'location',
-      label: { en: 'Based in', ja: '所在地' },
-      value: 'Tsuchiura, Ibaraki 🇯🇵',
+      label: { en: 'Location', ja: '所在地' },
+      value: 'Tsuchiura, Ibaraki, Japan',
     },
   ],
 };
 
 export const metrics: Metric[] = [
   {
+    id: 'experience',
+    value: '2+',
+    label: { en: 'Years full-stack', ja: '年のフルスタック開発' },
+    detail: {
+      en: 'React.js, NestJS and Node.js in production',
+      ja: 'React.js・NestJS・Node.jsで本番開発',
+    },
+  },
+  {
     id: 'migration',
     value: '2 TB',
     label: { en: 'Data migrated', ja: 'データ移行' },
     detail: {
-      en: 'InfluxDB 1.8 → Amazon Timestream, led end to end',
-      ja: 'InfluxDB 1.8 → Amazon Timestream の移行を総指揮',
+      en: 'InfluxDB 1.8 → Amazon Timestream on AWS',
+      ja: 'InfluxDB 1.8 → AWS上のAmazon Timestream',
     },
   },
   {
-    id: 'team',
-    value: '7',
-    label: { en: 'Engineers led', ja: '名のチームを統率' },
+    id: 'products',
+    value: '3',
+    label: { en: 'Enterprise products', ja: '企業向けプロダクト' },
     detail: {
-      en: 'Across a full system re-architecture',
-      ja: 'システム全体のリアーキテクチャにて',
+      en: 'Rewards platform, monitoring platform, inventory system',
+      ja: 'リワード、設備監視、在庫管理の各システム',
     },
   },
   {
@@ -80,17 +83,38 @@ export const metrics: Metric[] = [
     value: '98%',
     label: { en: 'Client satisfaction', ja: '顧客満足度' },
     detail: {
-      en: 'Kept on a high-difficulty enterprise project',
-      ja: '高難度の企業向けプロジェクトで維持',
+      en: 'On a high-difficulty re-architecture',
+      ja: '高難度のリアーキテクチャにて',
     },
   },
+];
+
+export const strengths: Strength[] = [
   {
-    id: 'promotions',
-    value: '2',
-    label: { en: 'Promotions in 2 years', ja: '2年間で2回昇進' },
-    detail: {
-      en: 'Junior → Senior (Mar 2025) → Team Leader (Mar 2026)',
-      ja: 'ジュニア → シニア（2025年3月）→ チームリーダー（2026年3月）',
+    id: 'frontend',
+    title: { en: 'Frontend development', ja: 'フロントエンド開発' },
+    description: {
+      en: 'Responsive, accessible React.js interfaces built from Figma designs, including custom data-visualisation components.',
+      ja: 'Figmaのデザインをもとに、レスポンシブでアクセシブルなReact.js画面やデータ可視化コンポーネントを実装します。',
     },
+    tools: ['React.js', 'TypeScript', 'Figma', 'Storybook'],
+  },
+  {
+    id: 'backend',
+    title: { en: 'Backend & APIs', ja: 'バックエンド・API開発' },
+    description: {
+      en: 'RESTful APIs and business logic with NestJS, Node.js and Express.js — documented with Swagger and covered by Jest tests.',
+      ja: 'NestJS・Node.js・Express.jsでREST APIと業務ロジックを開発し、Swaggerでドキュメント化、Jestでテストを整備します。',
+    },
+    tools: ['NestJS', 'Node.js', 'Express.js', 'Swagger'],
+  },
+  {
+    id: 'cloud',
+    title: { en: 'Cloud & data', ja: 'クラウド・データ' },
+    description: {
+      en: 'PostgreSQL schema design and query tuning, AWS serverless architecture, and large-scale data migration.',
+      ja: 'PostgreSQLのDB設計とクエリ最適化、AWSサーバーレス構成、大規模データ移行を担当します。',
+    },
+    tools: ['PostgreSQL', 'AWS', 'Amazon Timestream', 'Docker'],
   },
 ];

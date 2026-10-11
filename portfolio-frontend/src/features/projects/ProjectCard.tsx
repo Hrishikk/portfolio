@@ -2,12 +2,10 @@ import type { Project } from '@/types/content';
 import { Tag } from '@/components/ui';
 import { useLanguage } from '@/i18n/useLanguage';
 import { ui } from '@/i18n/ui';
-import { accentStyle, accentTagTone } from './accent';
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
   featured?: boolean;
 }
 
@@ -20,19 +18,15 @@ function CheckIcon() {
 }
 
 /** One project told as a three-step story: problem → what I did → result. */
-export function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
+export function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const { t, tl } = useLanguage();
   const headingId = `project-${project.id}`;
 
   return (
     <article
       className={`${styles.card} ${featured ? styles.featured : ''}`}
-      style={accentStyle(project.accent)}
       aria-labelledby={headingId}
     >
-      <span className={styles.number} aria-hidden="true">
-        {String(index + 1).padStart(2, '0')}
-      </span>
 
       <header className={styles.header}>
         <p className={styles.period}>{t(project.period)}</p>
@@ -40,7 +34,7 @@ export function ProjectCard({ project, index, featured = false }: ProjectCardPro
           {project.name}
         </h3>
         <p className={styles.role}>
-          <Tag tone={accentTagTone(project.accent)}>{t(project.role)}</Tag>
+          <Tag tone="accent">{t(project.role)}</Tag>
         </p>
       </header>
 

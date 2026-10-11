@@ -2,7 +2,7 @@
 
 Personal portfolio of **Karikkad Kayarthaya Hrishikesh**: Full Stack Engineer (React.js / NestJS), Team Leader and bilingual Bridge SE based in Japan.
 
-The site is fully bilingual (English / 日本語), responsive, and has light and dark themes.
+The site highlights full-stack development work, is bilingual (English / 日本語), responsive, and has light and dark themes.
 It is a **static site**: there is no backend, database or server to run or pay for.
 
 ## Repository layout
@@ -19,10 +19,11 @@ portfolio/
 ├── portfolio-frontend/
 │   └── src/
 │       ├── app/                 App composition and providers
+│       ├── assets/              Profile photo
 │       ├── content/             All site text, typed and bilingual (single source of truth)
 │       ├── types/               Content model types
 │       ├── i18n/  theme/        Language and theme context + hooks
-│       ├── components/ui/       Shared building blocks (Section, Reveal, Tag, Seal, Button)
+│       ├── components/ui/       Shared building blocks (Section, Reveal, Tag, Monogram, Button)
 │       ├── components/layout/   Navbar, Footer
 │       ├── features/            One folder per page section
 │       ├── hooks/               useInView, useActiveSection
@@ -61,14 +62,13 @@ All text lives in typed, bilingual files under `portfolio-frontend/src/content/`
 
 | File | Contents |
 | --- | --- |
-| `profile.ts` | Name, headline, summary, contact links, headline numbers |
+| `profile.ts` | Name, headline, summary, core stack, development strengths, contact links, headline numbers |
 | `career.ts` | Career "train line" stations |
 | `projects.ts` | Project stories (problem → what I did → result) |
-| `skills.ts` | Skill groups and years of experience |
-| `ai.ts` | AI-assisted development (GitHub Copilot, Claude Code) |
+| `skills.ts` | Skill groups and years of experience (including AI-assisted development) |
 | `credentials.ts` | Certifications, education, languages |
 
-Shared UI labels are in `portfolio-frontend/src/i18n/ui.ts`. Labels used by a single section are in that section's `copy.ts`.
+To change the photo, replace `portfolio-frontend/src/assets/profile.jpg` (portrait, about 640×820). Shared UI labels are in `portfolio-frontend/src/i18n/ui.ts`. Labels used by a single section are in that section's `copy.ts`.
 
 ## Deployment
 

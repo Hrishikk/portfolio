@@ -4,7 +4,7 @@
   flex-shrink: 0;
   width: 1.5rem;
   height: 1.5rem;
-  border: 5px solid var(--station-color, var(--color-indigo));
+  border: 5px solid var(--station-color, var(--color-accent));
   border-radius: 50%;
   background: var(--color-surface-raised);
   transition:
@@ -16,12 +16,12 @@
 .promotion {
   box-shadow:
     0 0 0 3px var(--color-surface-raised),
-    0 0 0 5px var(--color-vermilion);
+    0 0 0 5px var(--color-accent);
 }
 
 .current {
-  border-color: var(--color-vermilion);
-  background: var(--color-vermilion);
+  border-color: var(--color-accent);
+  background: var(--color-accent);
 }
 
 .selected {
@@ -32,7 +32,7 @@
   position: absolute;
   inset: -9px;
   border-radius: 50%;
-  border: 2px solid var(--color-vermilion);
+  border: 2px solid var(--color-accent);
   animation: pulse 1.8s var(--ease-out) infinite;
 }
 

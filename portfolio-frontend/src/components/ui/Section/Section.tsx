@@ -6,31 +6,23 @@ import styles from './Section.module.css';
 
 interface SectionProps {
   id: SectionId;
-  /** Section number shown in the eyebrow, e.g. "02". */
-  index: string;
-  /** One decorative kanji that sums up the section. */
-  kanji: string;
+  /** Short label above the title, e.g. "Projects". */
+  eyebrow: Localized;
   title: Localized;
   lead?: Localized;
   tone?: 'default' | 'alt';
   children: ReactNode;
 }
 
-/** Standard page section: numbered eyebrow, big kanji watermark, title, optional lead. */
-export function Section({ id, index, kanji, title, lead, tone = 'default', children }: SectionProps) {
+/** Standard page section: eyebrow label, title, optional lead, then content. */
+export function Section({ id, eyebrow, title, lead, tone = 'default', children }: SectionProps) {
   const { t } = useLanguage();
   const headingId = `${id}-heading`;
   return (
     <section id={id} aria-labelledby={headingId} className={`${styles.section} ${tone === 'alt' ? styles.alt : ''}`}>
       <div className={styles.inner}>
         <Reveal as="header" className={styles.header}>
-          <span className={styles.kanji} aria-hidden="true">
-            {kanji}
-          </span>
-          <p className={styles.eyebrow}>
-            <span className={styles.index}>{index}</span>
-            <span className={styles.rule} aria-hidden="true" />
-          </p>
+          <p className={styles.eyebrow}>{t(eyebrow)}</p>
           <h2 id={headingId} className={styles.title}>
             {t(title)}
           </h2>
