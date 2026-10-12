@@ -26,7 +26,7 @@ export const certifications: Certification[] = [
 
 export const education: Education = {
   degree: {
-    en: 'Bachelor of Engineering, Computer Science & Engineering',
+    en: 'Bachelor of Engineering, Computer Science Engineering',
     ja: 'コンピュータサイエンス工学 学士',
   },
   school: 'CMR Institute of Technology, India',
@@ -34,6 +34,6 @@ export const education: Education = {
 };
 
 export const languages: LanguageSkill[] = [
-  { id: 'en', name: { en: 'English', ja: '英語' }, level: { en: 'Professional', ja: 'ビジネスレベル' } },
-  { id: 'ja', name: { en: 'Japanese', ja: '日本語' }, level: { en: 'Business (JLPT N3)', ja: 'ビジネス会話（JLPT N3）' } },
+  { id: 'en', name: { en: 'English', ja: '英語' }, level: { en: 'Professional working proficiency', ja: 'ビジネスレベル' } },
+  { id: 'ja', name: { en: 'Japanese', ja: '日本語' }, level: { en: 'Business proficiency (JLPT N3)', ja: 'ビジネスレベル（日本語能力試験 N3）' } },
 ];

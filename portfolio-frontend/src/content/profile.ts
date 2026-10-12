@@ -14,14 +14,14 @@ export const profile: Profile = {
   },
   summary: {
     en: [
-      'I’m a Full Stack Engineer with 2+ years of experience building enterprise web applications at VeBuIn Inc. I work across the whole stack: React.js and TypeScript on the front end, NestJS and Node.js REST APIs on the back end, and PostgreSQL and AWS for data and infrastructure.',
-      'Recently I re-architected an industrial monitoring platform for AWS serverless and migrated 2 TB of time-series data from InfluxDB to Amazon Timestream. I care about clean, tested code: Jest and Cypress with TDD, Swagger-documented APIs, and type-safe API clients generated with Orval.',
-      'Today I lead a development team as Team Leader while still writing code every day. I work in both English and Japanese, which keeps specifications clear between clients and engineers.',
+      'I’m a Full Stack Engineer with over two and a half years of experience (since January 2024) building enterprise web applications at VeBuIn Inc. I work across the whole stack in TypeScript: React.js on the front end, NestJS, Node.js and Express.js REST APIs on the back end, and PostgreSQL on AWS and Azure for data and infrastructure.',
+      'I re-architected a power-plant anomaly detection system for AWS serverless and completed its 2 TB time-series migration from InfluxDB 1.8 to Amazon Timestream, from proofs of concept through the production cutover. I care about clean, tested code: Jest and Cypress with TDD, Swagger-documented APIs, type-safe clients generated with Orval, and AI-assisted development with Claude and GitHub Copilot.',
+      'Promoted twice — to Senior Web Engineer in March 2025 and Team Leader in March 2026 — I now lead development of an inventory management system while still writing code every day. I use Japanese daily at work, including client meetings and specification discussions.',
     ],
     ja: [
-      'VeBuIn株式会社にて2年以上、企業向けWebアプリケーションを開発しているフルスタックエンジニアです。フロントエンドはReact.jsとTypeScript、バックエンドはNestJS・Node.jsによるREST API、データ・インフラはPostgreSQLとAWSを担当しています。',
-      '直近では産業設備監視プラットフォームをAWSサーバーレス構成へ再構築し、InfluxDBからAmazon Timestreamへ2TBの時系列データを移行しました。JestとCypressによるTDD、SwaggerによるAPIドキュメント、Orvalによる型安全なAPIクライアント生成など、テストされた読みやすいコードを大切にしています。',
-      '現在はチームリーダーとして開発チームを率いながら、日々コードを書いています。日本語と英語の両方で業務ができるため、お客様とエンジニアの間で仕様を明確に保つことができます。',
+      '2024年1月よりVeBuIn株式会社にて企業向けWebアプリケーションを開発しているフルスタックエンジニアです。TypeScriptを中心に、フロントエンドはReact.js、バックエンドはNestJS・Node.js・Express.jsによるREST API、データ・インフラはAWS・Azure上のPostgreSQLを担当しています。',
+      '発電所向け異常検知システムをAWSサーバーレス構成へ再構築し、InfluxDB 1.8からAmazon Timestreamへの2TB時系列データ移行をPoCから本番移行まで完遂しました。JestとCypressによるTDD、SwaggerによるAPIドキュメント、Orvalによる型安全なAPIクライアント生成、ClaudeやGitHub Copilotを活用したAI支援開発など、品質の高いコードを大切にしています。',
+      '2025年3月にシニアWebエンジニア、2026年3月にチームリーダーへ昇進し、現在は在庫管理システムの開発をリードしながら日々コードを書いています。顧客との打ち合わせや仕様調整など、業務で日常的に日本語を使用しています。',
     ],
   },
   location: { en: 'Tsuchiura, Ibaraki, Japan', ja: '茨城県土浦市' },
@@ -53,7 +53,7 @@ export const profile: Profile = {
 export const metrics: Metric[] = [
   {
     id: 'experience',
-    value: '2+',
+    value: '2.5+',
     label: { en: 'Years full-stack', ja: '年のフルスタック開発' },
     detail: {
       en: 'React.js, NestJS and Node.js in production',
@@ -65,8 +65,8 @@ export const metrics: Metric[] = [
     value: '2 TB',
     label: { en: 'Data migrated', ja: 'データ移行' },
     detail: {
-      en: 'InfluxDB 1.8 → Amazon Timestream on AWS',
-      ja: 'InfluxDB 1.8 → AWS上のAmazon Timestream',
+      en: 'InfluxDB 1.8 → Amazon Timestream, PoC to production',
+      ja: 'InfluxDB 1.8 → Amazon Timestream、PoCから本番まで完遂',
     },
   },
   {
@@ -74,8 +74,8 @@ export const metrics: Metric[] = [
     value: '3',
     label: { en: 'Enterprise products', ja: '企業向けプロダクト' },
     detail: {
-      en: 'Rewards platform, monitoring platform, inventory system',
-      ja: 'リワード、設備監視、在庫管理の各システム',
+      en: 'Rewards app, anomaly detection system, inventory system',
+      ja: 'リワード、異常検知、在庫管理の各システム',
     },
   },
   {
@@ -112,8 +112,8 @@ export const strengths: Strength[] = [
     id: 'cloud',
     title: { en: 'Cloud & data', ja: 'クラウド・データ' },
     description: {
-      en: 'PostgreSQL schema design and query tuning, AWS serverless architecture, and large-scale data migration.',
-      ja: 'PostgreSQLのDB設計とクエリ最適化、AWSサーバーレス構成、大規模データ移行を担当します。',
+      en: 'PostgreSQL schema design and query tuning, AWS serverless architecture, and large-scale cloud data migration.',
+      ja: 'PostgreSQLのDB設計とクエリ最適化、AWSサーバーレス構成、大規模なクラウドデータ移行を担当します。',
     },
     tools: ['PostgreSQL', 'AWS', 'Amazon Timestream', 'Docker'],
   },

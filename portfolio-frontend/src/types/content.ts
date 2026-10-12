@@ -80,8 +80,8 @@ export interface Project {
 
 export interface SkillItem {
   name: string;
-  /** Hands-on experience, in years (from the 職務経歴書 skills table) when known. */
-  years?: number;
+  /** Hands-on experience in months (from the 職務経歴書 skills table), when known. */
+  months?: number;
 }
 
 export interface SkillGroup {

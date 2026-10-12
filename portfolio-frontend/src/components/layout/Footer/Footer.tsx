@@ -47,9 +47,6 @@ export function Footer() {
         <div className={styles.bottom}>
           <p className={styles.meta}>
             <span>© {CURRENT_YEAR} {profile.name}</span>
-            <span className={styles.dot} aria-hidden="true">
-              ・
-            </span>
           </p>
           <a className={styles.top} href="#home">
             <span aria-hidden="true">↑</span> {t(ui.actions.backToTop)}

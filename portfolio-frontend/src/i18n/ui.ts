@@ -30,7 +30,6 @@ export const ui = {
     problem: { en: 'The problem', ja: '課題' },
     solution: { en: 'What I did', ja: '取り組み' },
     outcome: { en: 'Result', ja: '成果' },
-    years: { en: 'yrs', ja: '年' },
     education: { en: 'Education', ja: '学歴' },
     languages: { en: 'Languages', ja: '語学' },
     earned: { en: 'Earned', ja: '取得済み' },
