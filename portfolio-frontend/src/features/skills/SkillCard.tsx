@@ -14,8 +14,8 @@ interface SkillCardProps {
 export function SkillCard({ group }: SkillCardProps) {
   const { t } = useLanguage();
   const { ref, inView } = useInView<HTMLElement>({ threshold: 0.3 });
-  const measured = group.items.filter((item) => item.years !== undefined);
-  const tagged = group.items.filter((item) => item.years === undefined);
+  const measured = group.items.filter((item) => item.months !== undefined);
+  const tagged = group.items.filter((item) => item.months === undefined);
   const titleId = `skill-${group.id}-title`;
 
   return (
@@ -30,7 +30,7 @@ export function SkillCard({ group }: SkillCardProps) {
           <p className={styles.subLabel}>{t(copy.experienceScale)}</p>
           <ul className={styles.meters}>
             {measured.map((item, i) => (
-              <SkillMeter key={item.name} name={item.name} years={item.years ?? 0} active={inView} delay={i * 90} />
+              <SkillMeter key={item.name} name={item.name} months={item.months ?? 0} active={inView} delay={i * 90} />
             ))}
           </ul>
         </>
