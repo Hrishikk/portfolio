@@ -1,10 +1,5 @@
 import type { CSSProperties } from 'react';
 
-/** Step number for a station, e.g. index 0 → "01". */
-export function stationCode(index: number): string {
-  return String(index + 1).padStart(2, '0');
-}
-
 /**
  * How far along the career line a station sits (0–100), used for the line's progress fill.
  * Used as a CSS custom property so colour stays token-driven.

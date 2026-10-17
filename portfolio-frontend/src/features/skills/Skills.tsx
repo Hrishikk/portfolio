@@ -6,10 +6,10 @@ import styles from './Skills.module.css';
 
 export function Skills() {
   return (
-    <Section id="skills" tone="alt" eyebrow={ui.sections.skills.eyebrow} title={ui.sections.skills.title}>
+    <Section id="skills" tone="alt" title={ui.sections.skills.title}>
       <ul className={styles.grid}>
         {skillGroups.map((group, i) => (
-          <Reveal as="li" key={group.id} delay={(i % 3) * 80} className={styles.cell}>
+          <Reveal as="li" key={group.id} delay={(i % 3) * 120} className={styles.cell}>
             <SkillCard group={group} />
           </Reveal>
         ))}

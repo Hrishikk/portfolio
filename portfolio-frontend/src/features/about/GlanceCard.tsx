@@ -8,7 +8,7 @@ const current = career[career.length - 1];
 
 /** Side card summarising current role, location, languages and education. */
 export function GlanceCard() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <aside className={styles.card} aria-labelledby="about-glance">
@@ -34,7 +34,8 @@ export function GlanceCard() {
               {languages.map((lang) => (
                 <li key={lang.id}>
                   <strong>{t(lang.name)}</strong>
-                  <span className={styles.muted}>{t(lang.level)}</span>
+                  {/* Non-breaking spaces keep "日本語能力試験 N3" on one line; it may only break at the bracket. */}
+                  <span className={styles.muted}>{locale === 'ja' ? t(lang.level).replace(/ /g, '\u00a0') : t(lang.level)}</span>
                 </li>
               ))}
             </ul>

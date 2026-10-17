@@ -1,3 +1,30 @@
+/* Opening statement, lit word by word on scroll (see ScrollLit). */
+.lit {
+  max-width: 58rem;
+  margin-bottom: var(--space-9);
+  font-size: clamp(1.4rem, 1rem + 1.4vw, 2.1rem);
+  font-weight: 550;
+  line-height: 1.32;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+}
+
+:lang(ja) .lit {
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.lit span {
+  opacity: clamp(0.18, calc((var(--lit, 0) - var(--i)) / 5), 1);
+  transition: opacity 200ms linear;
+}
+
+@media print {
+  .lit span {
+    opacity: 1;
+  }
+}
+
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
@@ -13,14 +40,10 @@
   color: var(--color-ink-soft);
 }
 
-.summary p:first-child {
-  color: var(--color-ink);
-  font-weight: 500;
-}
 
 /* At-a-glance card */
 .card {
-  padding: var(--space-5);
+  padding: var(--space-6);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
@@ -46,10 +69,7 @@
 
 .fact dt {
   margin-bottom: var(--space-1);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: var(--text-sm);
   color: var(--color-ink-muted);
 }
 
@@ -58,17 +78,21 @@
   font-size: var(--text-sm);
 }
 
+/* Two aligned columns: language, level. Levels line up and wrap inside their own column. */
 .langs {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: var(--space-1) var(--space-4);
   list-style: none;
 }
 
 .langs li {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-3);
+  display: contents;
+}
+
+/* Japanese levels break only at the bracket, never inside 日本語能力試験 N3. */
+:lang(ja) .langs {
+  word-break: keep-all;
 }
 
 .block {
@@ -79,48 +103,48 @@
   color: var(--color-ink-muted);
 }
 
-/* Development areas */
+/* Development areas: one hairline-ruled row, same grammar as the hero metric strip. */
 .strengths {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-5);
-  margin-top: var(--space-7);
+  margin-top: var(--space-9);
   list-style: none;
+}
+
+.strengths::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-border-strong), var(--color-border-strong) 70%, transparent);
+}
+
+.strengthCell {
+  padding: var(--space-6) var(--space-6) 0;
+}
+
+.strengthCell:first-child {
+  padding-left: 0;
+}
+
+.strengthCell + .strengthCell {
+  border-left: 1px solid var(--color-border);
 }
 
 .strength {
   height: 100%;
-  padding: var(--space-5);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
-  transition: box-shadow var(--duration) var(--ease-out), border-color var(--duration) var(--ease-out);
-}
-
-.strength:hover {
-  border-color: var(--color-accent-border);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.strengthIcon {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  margin-bottom: var(--space-4);
-  border-radius: var(--radius-md);
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
 }
 
 .strengthTitle {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .strengthText {
-  margin-top: var(--space-2);
-  font-size: var(--text-sm);
+  margin-top: var(--space-3);
+  font-size: var(--text-base);
   color: var(--color-ink-soft);
 }
 
@@ -128,7 +152,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
   list-style: none;
 }
 
@@ -140,5 +164,15 @@
 
   .strengths {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .strengthCell,
+  .strengthCell:first-child {
+    padding: var(--space-5) 0;
+  }
+
+  .strengthCell + .strengthCell {
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
   }
 }

@@ -4,12 +4,12 @@ import { ui } from '@/i18n/ui';
 import { ProjectCard } from './ProjectCard';
 import styles from './Projects.module.css';
 
-const STAGGER_MS = 90;
+const STAGGER_MS = 130;
 
 /** Featured projects as story cards; the first one spans the full width. */
 export function Projects() {
   return (
-    <Section id="projects" eyebrow={ui.sections.projects.eyebrow} title={ui.sections.projects.title}>
+    <Section id="projects" title={ui.sections.projects.title}>
       <ul className={styles.grid}>
         {projects.map((project, index) => (
           <Reveal

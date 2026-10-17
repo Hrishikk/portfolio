@@ -7,7 +7,8 @@ const STORAGE_KEY = 'portfolio.theme';
 function initialTheme(): Theme {
   const stored = readStorage(STORAGE_KEY);
   if (stored === 'light' || stored === 'dark') return stored;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  // Light is the default; dark only when the visitor has chosen it with the toggle.
+  return 'light';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

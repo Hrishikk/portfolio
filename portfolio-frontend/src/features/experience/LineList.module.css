@@ -1,6 +1,7 @@
 .list {
   --rail-x: 1.25rem;
-  --rail-w: 6px;
+  --rail-w: 4px;
+  perspective: 1200px;
   --marker-top: 1.6rem;
   margin: 0;
   padding: 0;
@@ -20,7 +21,14 @@
   bottom: 0;
   left: calc(var(--rail-x) - var(--rail-w) / 2);
   width: var(--rail-w);
-  background: var(--station-color);
+  background: linear-gradient(to bottom, color-mix(in oklab, var(--color-accent), var(--aurora-3) var(--growth, 0%)), color-mix(in oklab, var(--color-accent), var(--aurora-3) min(calc(var(--growth, 0%) + 25%), 100%)));
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 500ms linear calc(var(--i) * 180ms);
+}
+
+.in .rail {
+  transform: scaleY(1);
 }
 
 .item:first-child .rail {
@@ -66,8 +74,8 @@
 }
 
 .toggle[aria-expanded='true'] {
-  border-top: 3px solid var(--station-color);
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  border-color: var(--station-color);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   box-shadow: none;
 }
 
@@ -137,9 +145,46 @@
   padding: var(--space-4);
   border: 1px solid var(--color-border);
   border-top: 0;
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   background: var(--color-surface);
   box-shadow: var(--shadow-card);
+  animation: open 450ms var(--ease-out);
+  transform-origin: 50% 0;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: rotateX(-14deg) translateY(-6px);
+  }
+}
+
+/* Stations swing in from the rail side, one after another, as the rail reaches them. */
+.heading,
+.marker {
+  opacity: 0;
+  transition:
+    opacity 500ms var(--ease-out) calc(120ms + var(--i) * 180ms),
+    transform 800ms var(--ease-out) calc(120ms + var(--i) * 180ms);
+}
+
+.heading {
+  transform: rotateY(-28deg) translateX(-12px);
+  transform-origin: 0 50%;
+}
+
+.marker {
+  transform: translate(-50%, -50%) scale(0.2);
+}
+
+.in .heading {
+  opacity: 1;
+  transform: none;
+}
+
+.in .marker {
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
 
 .body[hidden] {
@@ -150,5 +195,23 @@
   .toggle,
   .chevron {
     transition: none;
+  }
+
+  .rail,
+  .heading,
+  .marker,
+  .body {
+    opacity: 1;
+    transition: none;
+    animation: none;
+  }
+
+  .rail,
+  .heading {
+    transform: none;
+  }
+
+  .marker {
+    transform: translate(-50%, -50%);
   }
 }

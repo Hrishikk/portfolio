@@ -1,33 +1,43 @@
 /*
- * Design tokens — neutral slate with a single blue accent.
+ * Design tokens: Apple-white ground, deep ink, one indigo accent,
+ * and a "living" gradient field (aurora) reserved for the hero band and hairline glows.
  * Components must use these variables, never raw colours.
  */
 :root {
   /* Surfaces */
-  --color-bg: #f8fafc;
-  --color-bg-alt: #f1f5f9;
+  --color-bg: #fbfbfd;
+  --color-bg-alt: #f4f4f8;
   --color-surface: #ffffff;
   --color-surface-raised: #ffffff;
-  --color-border: #e2e8f0;
-  --color-border-strong: #cbd5e1;
+  --color-border: #e7e7ef;
+  --color-border-strong: #d3d4df;
 
   /* Text */
-  --color-ink: #0f172a;
-  --color-ink-soft: #334155;
-  --color-ink-muted: #64748b;
+  --color-ink: #0b0d1a;
+  --color-ink-soft: #3d4055;
+  --color-ink-muted: #676b80;
   --color-on-accent: #ffffff;
 
-  /* Accent (the only brand colour) */
-  --color-accent: #1d4ed8;
-  --color-accent-hover: #1e40af;
-  --color-accent-soft: #eff4ff;
-  --color-accent-border: #c7d7fe;
-  --color-focus: #2563eb;
+  /* Accent (the only UI brand colour) */
+  --color-accent: #4f46e5;
+  --color-accent-hover: #4338ca;
+  --color-accent-soft: #eef0ff;
+  --color-accent-border: #cdd0fb;
+  --color-focus: #6366f1;
+
+  /* Aurora: the living gradient field (hero band, glows). Never used for text. */
+  --aurora-base: #eef0ff;
+  --aurora-1: #6366f1;
+  --aurora-2: #22d3ee;
+  --aurora-3: #a855f7;
+  --aurora-4: #fb7185;
+  --aurora-5: #fdba74;
+  --aurora-opacity: 1;
 
   /* Typography */
-  --font-display: 'Plus Jakarta Sans', 'Inter', 'Noto Sans JP', system-ui, sans-serif;
-  --font-body: 'Inter', 'Noto Sans JP', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Geist', 'Noto Sans JP', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Geist', 'Noto Sans JP', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -35,8 +45,8 @@
   --text-lg: 1.125rem;
   --text-xl: 1.375rem;
   --text-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-  --text-3xl: clamp(1.875rem, 1.4rem + 1.8vw, 2.5rem);
-  --text-hero: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
+  --text-3xl: clamp(2rem, 1.35rem + 2.6vw, 3.25rem);
+  --text-hero: clamp(2.6rem, 1.4rem + 4.6vw, 5.25rem);
 
   /* Spacing (4px base) */
   --space-1: 0.25rem;
@@ -48,48 +58,67 @@
   --space-7: 3rem;
   --space-8: 4rem;
   --space-9: 6rem;
+  --space-10: 8rem;
 
-  /* Shape & depth */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* Shape & depth: layered, offset, soft (Stripe-style) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
   --radius-pill: 999px;
-  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px -4px rgb(15 23 42 / 0.08);
-  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.05), 0 12px 32px -8px rgb(15 23 42 / 0.16);
+  --shadow-card: 0 1px 1px rgb(11 13 26 / 0.03), 0 2px 6px -1px rgb(11 13 26 / 0.05), 0 12px 28px -12px rgb(50 50 93 / 0.12);
+  --shadow-card-hover: 0 2px 4px rgb(11 13 26 / 0.04), 0 18px 40px -14px rgb(50 50 93 / 0.28), 0 10px 22px -16px rgb(0 0 0 / 0.2);
+  --shadow-float: 0 50px 100px -20px rgb(50 50 93 / 0.28), 0 30px 60px -30px rgb(0 0 0 / 0.32);
 
   /* Layout */
-  --container: 1120px;
+  --container: 1180px;
   --gutter: clamp(1rem, 4vw, 2rem);
-  --nav-height: 64px;
+  --nav-height: 68px;
 
   /* Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --duration: 400ms;
+
+  /* Spotlight: the soft light that follows the pointer across interactive cards */
+  --spotlight: rgb(99 102 241 / 0.09);
+  --spotlight-edge: rgb(99 102 241 / 0.55);
 
   color-scheme: light;
 }
 
 :root[data-theme='dark'] {
-  --color-bg: #0b1120;
-  --color-bg-alt: #0f172a;
-  --color-surface: #111a2e;
-  --color-surface-raised: #16213a;
-  --color-border: #1e293b;
-  --color-border-strong: #334155;
+  --color-bg: #07080f;
+  --color-bg-alt: #0b0d17;
+  --color-surface: #0f111c;
+  --color-surface-raised: #141726;
+  --color-border: #1e2132;
+  --color-border-strong: #2d3147;
 
-  --color-ink: #f1f5f9;
-  --color-ink-soft: #cbd5e1;
-  --color-ink-muted: #94a3b8;
-  --color-on-accent: #0b1120;
+  --color-ink: #f2f3f8;
+  --color-ink-soft: #c4c7d8;
+  --color-ink-muted: #8f93aa;
+  --color-on-accent: #07080f;
 
-  --color-accent: #7aa2ff;
-  --color-accent-hover: #a5c0ff;
-  --color-accent-soft: #15213d;
-  --color-accent-border: #26386a;
-  --color-focus: #93b4ff;
+  --color-accent: #8b8ff9;
+  --color-accent-hover: #a8abfb;
+  --color-accent-soft: #161936;
+  --color-accent-border: #2c3170;
+  --color-focus: #a5b4fc;
 
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px -4px rgb(0 0 0 / 0.4);
-  --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 32px -8px rgb(0 0 0 / 0.55);
+  --aurora-base: #0c0e24;
+  --aurora-1: #4f46e5;
+  --aurora-2: #0e7490;
+  --aurora-3: #7e22ce;
+  --aurora-4: #be185d;
+  --aurora-5: #b45309;
+  --aurora-opacity: 0.85;
+
+  --shadow-card: 0 1px 1px rgb(0 0 0 / 0.3), 0 12px 28px -12px rgb(0 0 0 / 0.6);
+  --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.35), 0 22px 44px -14px rgb(0 0 0 / 0.75);
+  --shadow-float: 0 50px 100px -20px rgb(0 0 0 / 0.7), 0 30px 60px -30px rgb(0 0 0 / 0.8);
+
+  --spotlight: rgb(139 143 249 / 0.1);
+  --spotlight-edge: rgb(165 180 252 / 0.6);
 
   color-scheme: dark;
 }

@@ -6,12 +6,12 @@ import type { Localized } from '@/types/content';
  */
 export const ui = {
   sections: {
-    about: { eyebrow: { en: 'About', ja: '自己紹介' }, title: { en: 'Building reliable web products, front to back', ja: 'フロントからバックエンドまで、信頼できるWebプロダクトを' } },
-    experience: { eyebrow: { en: 'Experience', ja: '職務経歴' }, title: { en: 'My development journey', ja: '開発者としての歩み' } },
-    projects: { eyebrow: { en: 'Projects', ja: 'プロジェクト' }, title: { en: 'Selected work', ja: '主な開発実績' } },
-    skills: { eyebrow: { en: 'Skills', ja: 'スキル' }, title: { en: 'Technologies I work with', ja: '使用技術' } },
-    certifications: { eyebrow: { en: 'Credentials', ja: '資格・学歴' }, title: { en: 'Certifications & education', ja: '資格・学歴' } },
-    contact: { eyebrow: { en: 'Contact', ja: 'お問い合わせ' }, title: { en: 'Let’s work together', ja: 'お気軽にご連絡ください' } },
+    about: { title: { en: 'Building reliable web products, front to back', ja: 'フロントからバックエンドまで、信頼できるWebプロダクトを' } },
+    experience: { title: { en: 'My development journey', ja: '開発者としての歩み' } },
+    projects: { title: { en: 'Selected work', ja: '主な開発実績' } },
+    skills: { title: { en: 'Technologies I work with', ja: '使用技術' } },
+    certifications: { title: { en: 'Certifications & education', ja: '資格・学歴' } },
+    contact: { title: { en: 'Let’s work together', ja: 'お気軽にご連絡ください' } },
   },
   actions: {
     contact: { en: 'Get in touch', ja: 'お問い合わせ' },
@@ -35,4 +35,4 @@ export const ui = {
     earned: { en: 'Earned', ja: '取得済み' },
     inProgress: { en: 'In progress', ja: '学習中' },
   },
-} satisfies Record<string, Record<string, Localized | { eyebrow: Localized; title: Localized }>>;
+} satisfies Record<string, Record<string, Localized | { title: Localized }>>;

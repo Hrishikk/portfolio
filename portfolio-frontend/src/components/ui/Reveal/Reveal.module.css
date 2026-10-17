@@ -1,19 +1,56 @@
+/*
+ * 3D entrances. Every variant ends at the element's natural state, starts hidden only
+ * until it scrolls into view, and is skipped entirely under reduced motion and in print.
+ */
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
+  filter: blur(6px);
   transition:
-    opacity var(--duration) var(--ease-out) var(--reveal-delay, 0ms),
-    transform var(--duration) var(--ease-out) var(--reveal-delay, 0ms);
+    opacity 700ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform 1100ms var(--ease-out) var(--reveal-delay, 0ms),
+    filter 700ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.tilt {
+  transform: perspective(1200px) translateY(40px) rotateX(14deg);
+  transform-origin: 50% 0%;
+}
+
+.swingLeft {
+  transform: perspective(1400px) translateX(-24px) rotateY(16deg);
+  transform-origin: 0% 50%;
+}
+
+.swingRight {
+  transform: perspective(1400px) translateX(24px) rotateY(-16deg);
+  transform-origin: 100% 50%;
+}
+
+.flip {
+  transform: perspective(900px) translateY(24px) rotateX(-60deg);
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
 }
 
 .visible {
   opacity: 1;
   transform: none;
+  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+@media print {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }

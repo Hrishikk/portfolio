@@ -4,18 +4,16 @@ import { useLanguage } from '@/i18n/useLanguage';
 import { ui } from '@/i18n/ui';
 import { copy } from './copy';
 import { formatPeriod } from './formatPeriod';
-import { StationBadge } from './StationBadge';
 import styles from './StationDetail.module.css';
 
 interface StationDetailProps {
   station: CareerStation;
-  code: string;
   /** Hide the header (used on mobile where the toggle already shows it). */
   compact?: boolean;
 }
 
 /** Full information for one career station: role, period, team, story, highlights and tags. */
-export function StationDetail({ station, code, compact = false }: StationDetailProps) {
+export function StationDetail({ station, compact = false }: StationDetailProps) {
   const { t, tl, locale } = useLanguage();
   const period = formatPeriod(station.start, station.end, locale, t(ui.labels.present));
 
@@ -23,10 +21,9 @@ export function StationDetail({ station, code, compact = false }: StationDetailP
     <div className={`${styles.detail} ${compact ? styles.compact : ''}`}>
       {!compact && (
         <header className={styles.header}>
-          <StationBadge code={code} />
           <div className={styles.headings}>
-            <p className={styles.title}>{t(station.title)}</p>
-            <h3 className={styles.role}>{t(station.role)}</h3>
+            <h3 className={styles.title}>{t(station.title)}</h3>
+            <p className={styles.role}>{t(station.role)}</p>
           </div>
           {station.kind === 'promotion' && (
             <Tag tone="accent">{t(copy.promoted)}</Tag>

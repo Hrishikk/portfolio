@@ -7,6 +7,7 @@
 }
 
 html {
+  scrollbar-color: var(--color-border-strong) var(--color-bg);
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-height) + var(--space-4));
   -webkit-text-size-adjust: 100%;
@@ -21,6 +22,7 @@ body {
   font-size: var(--text-base);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   transition: background-color var(--duration) var(--ease-out), color var(--duration) var(--ease-out);
 }
@@ -32,6 +34,14 @@ html:lang(ja) {
   line-break: strict;
 }
 
+/*
+ * Keep Japanese phrases (文節) together in headings and short UI strings, where a split word reads badly.
+ * Body paragraphs keep normal breaking with strict rules so lines stay even.
+ */
+:lang(ja) :is(h1, h2, h3, h4, button, figcaption, [data-phrase]) {
+  word-break: auto-phrase;
+}
+
 h1,
 h2,
 h3,
@@ -39,8 +49,9 @@ h4 {
   font-family: var(--font-display);
   line-height: 1.2;
   margin: 0;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 p {
@@ -75,9 +86,85 @@ button {
   border-radius: var(--radius-sm);
 }
 
+input,
+textarea {
+  caret-color: var(--color-accent);
+}
+
+/*
+ * Spotlight surface (see useSpotlight). A soft light follows the pointer inside the card,
+ * and the card's hairline border lights up nearest the pointer.
+ */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight::before,
+.spotlight::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out);
+}
+
+.spotlight::before {
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(28rem circle at var(--spot-x, 50%) var(--spot-y, 50%), var(--spotlight), transparent 60%);
+}
+
+.spotlight::after {
+  inset: -1px;
+  padding: 1px;
+  background: radial-gradient(18rem circle at var(--spot-x, 50%) var(--spot-y, 50%), var(--spotlight-edge), transparent 70%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+.spotlight[data-spot='on']::before,
+.spotlight[data-spot='on']::after {
+  opacity: 1;
+}
+
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  background: color-mix(in srgb, var(--color-accent) 24%, transparent);
+  color: var(--color-ink);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border: 3px solid var(--color-bg);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-muted);
+}
+
+a:not([class]) {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 .visually-hidden {
