@@ -31,28 +31,125 @@
   min-width: 0;
 }
 
-/* Certificate slip: double rule inside, stamp shadow outside. */
+/*
+ * Flip card. The article holds the perspective (and the spotlight tilt);
+ * .flipper turns over; both faces share one grid cell so the card is as tall as its taller face.
+ */
 .cert {
   position: relative;
   flex: 1;
   display: flex;
+  perspective: 1200px;
+  border-radius: var(--radius-lg);
+}
+
+.flipper {
+  position: relative;
+  flex: 1;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 760ms var(--ease-out);
+}
+
+.flipped .flipper {
+  transform: rotateY(180deg);
+}
+
+.face {
+  grid-area: 1 / 1;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  min-width: 0;
+  min-height: 11.5rem;
   padding: var(--space-5);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   transition: box-shadow var(--duration) var(--ease-out);
 }
 
-
-.pending {
-  border-style: dashed;
-  border-color: var(--color-border-strong);
-  box-shadow: var(--shadow-card);
+/* The pointer light from useSpotlight (vars are set on the article and inherited here). */
+.face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(28rem circle at var(--spot-x, 50%) var(--spot-y, 50%), var(--spotlight), transparent 60%);
+  transition: opacity 400ms var(--ease-out);
 }
 
+.cert[data-spot='on'] .face::before {
+  opacity: 1;
+}
+
+.cert[data-spot='on'] .face {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.back {
+  transform: rotateY(180deg);
+  background: color-mix(in srgb, var(--color-accent-soft) 45%, var(--color-surface));
+}
+
+.pending .face {
+  border-style: dashed;
+  border-color: var(--color-border-strong);
+}
+
+.hint {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  transition: color var(--duration) var(--ease-out);
+}
+
+.hint svg {
+  flex: none;
+  transition: transform 500ms var(--ease-out);
+}
+
+.cert:hover .hint {
+  color: var(--color-accent);
+}
+
+.cert:hover .hint svg {
+  transform: rotate(180deg);
+}
+
+/* The whole card is the toggle; its focus ring outlines the card. */
+.flipButton {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  cursor: pointer;
+}
+
+.flipButton:focus-visible {
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.cert:has(.flipButton:active) .flipper {
+  scale: 0.985;
+}
 
 .certTop {
   position: relative;
@@ -64,19 +161,106 @@
   margin-bottom: var(--space-2);
 }
 
-
 .certName {
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-lg);
   line-height: 1.35;
   color: var(--color-ink);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.backLabel {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
 }
 
 .issuer {
   margin: 0;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+}
+
+.backFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin: var(--space-3) 0 0;
+}
+
+.backFoot .date {
+  margin: 0;
+  padding: 0;
+}
+
+.progress {
   font-size: var(--text-sm);
   color: var(--color-ink-soft);
+  line-break: strict;
+}
+
+/* Reduced motion and print: no turning over; both faces sit flat in one card. */
+@media (prefers-reduced-motion: reduce) {
+  .flipper,
+  .face,
+  .hint,
+  .hint svg {
+    transition: none;
+  }
+
+  .flipped .flipper,
+  .back {
+    transform: none;
+  }
+
+  .face {
+    grid-area: auto;
+    min-height: 0;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+
+  .front {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .back {
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .hint,
+  .flipButton {
+    display: none;
+  }
+
+  .cert:has(.flipButton:active) .flipper {
+    scale: none;
+  }
+}
+
+@media print {
+  .flipped .flipper,
+  .back {
+    transform: none;
+  }
+
+  .face {
+    grid-area: auto;
+    backface-visibility: visible;
+  }
+
+  .hint,
+  .flipButton {
+    display: none;
+  }
 }
 
 .date {

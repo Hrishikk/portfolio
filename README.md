@@ -10,7 +10,7 @@ It is a **static site**: there is no backend, database or server to run or pay f
 | Folder | What it is | Stack |
 | --- | --- | --- |
 | [`portfolio-frontend/`](portfolio-frontend) | The website | React 19, TypeScript, Vite, CSS Modules |
-| [`.github/`](.github) | CI/CD workflows, Dependabot, PR template | GitHub Actions, AWS |
+| [`.github/`](.github) | CI workflow, PR template | GitHub Actions |
 
 The repo is laid out as a monorepo so more packages can be added later without restructuring.
 
@@ -31,8 +31,6 @@ portfolio/
 │       └── styles/              Design tokens + global styles
 ├── .github/
 │   ├── workflows/ci.yml         CI: lint, type-check and build on every pull request
-│   ├── workflows/deploy.yml     CD: deploy to AWS S3 + CloudFront on every merge to main
-│   ├── dependabot.yml           Weekly dependency update PRs
 │   └── pull_request_template.md
 └── package.json                 Convenience scripts (run from the repo root)
 ```
@@ -74,34 +72,16 @@ All text lives in typed, bilingual files under `portfolio-frontend/src/content/`
 
 To change the photo, replace `portfolio-frontend/src/assets/profile.jpg` (portrait, about 640×820). Shared UI labels are in `portfolio-frontend/src/i18n/ui.ts`. Labels used by a single section are in that section's `copy.ts`.
 
-## CI/CD
+## CI
 
-The site is built and deployed by GitHub Actions to **AWS S3 + CloudFront**.
+Every pull request into `main` is checked by GitHub Actions.
 
 ```
 Pull request ──► CI: npm ci → lint → type-check → build              (must pass to merge)
-Merge to main ─► CI again ─► Deploy: upload to S3 → clear CloudFront cache → live
 ```
 
 | Workflow | Trigger | What it does |
 | --- | --- | --- |
-| [`ci.yml`](.github/workflows/ci.yml) | Pull request into `main` (also reused by deploy) | Installs dependencies, lints, type-checks, builds and uploads `dist/` as an artifact |
-| [`deploy.yml`](.github/workflows/deploy.yml) | Push to `main`, or a manual run | Runs CI, signs in to AWS with OIDC (no stored keys), syncs `dist/` to S3 and invalidates CloudFront |
+| [`ci.yml`](.github/workflows/ci.yml) | Pull request into `main` | Installs dependencies, lints, type-checks, builds and uploads `dist/` as an artifact |
 
-Hashed files in `assets/` are cached for a year; `index.html` is always revalidated, so visitors see a new release immediately.
-
-### Required configuration
-
-Create a GitHub environment named **`production`** (Settings → Environments) with these **variables**:
-
-| Variable | Example |
-| --- | --- |
-| `AWS_ROLE_ARN` | `arn:aws:iam::123456789012:role/portfolio-github-deploy` |
-| `AWS_REGION` | `ap-northeast-1` |
-| `S3_BUCKET` | `hrishikesh-portfolio-site` |
-| `CLOUDFRONT_DISTRIBUTION_ID` | `E1A2B3C4D5E6F7` |
-| `SITE_URL` | `https://d111111abcdef8.cloudfront.net` |
-
-On the AWS side this needs a private S3 bucket, a CloudFront distribution that reads it through Origin Access Control, and an IAM role that trusts GitHub's OIDC provider for this repository's `production` environment. The role only needs to list, upload and delete objects in that bucket and create invalidations on that distribution.
-
-Until these are set, the deploy job stops at its first step with a message naming the missing variables; CI still runs on pull requests.
+The site is static: `npm run build` produces `portfolio-frontend/dist`, which can be served from any static host.

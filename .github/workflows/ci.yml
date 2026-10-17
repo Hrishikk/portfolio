@@ -1,8 +1,8 @@
 # Continuous Integration
 #
-# Runs on every pull request into main, and is reused by deploy.yml before each deployment.
+# Runs on every pull request into main (and can be called from another workflow).
 # Fails if the frontend doesn't lint, type-check or build. On success, the built site
-# (portfolio-frontend/dist) is uploaded as the "site" artifact so it can be deployed as-is.
+# (portfolio-frontend/dist) is uploaded as the "site" artifact.
 
 name: CI
 
@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 # A new push to the same pull request cancels the older, now outdated run.
-# Runs started by deploy.yml (no PR number) get a unique group and are never cancelled here.
+# Runs without a PR number (called from another workflow) get a unique group and are never cancelled here.
 concurrency:
   group: ci-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: true

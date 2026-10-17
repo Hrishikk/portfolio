@@ -7,9 +7,11 @@ import { Experience } from '@/features/experience/Experience';
 import { Hero } from '@/features/hero/Hero';
 import { Projects } from '@/features/projects/Projects';
 import { Skills } from '@/features/skills/Skills';
+import { useAnchorTravel } from '@/hooks/useAnchorTravel';
 
 /** Page composition only — each section owns its own layout and data access. */
 export function App() {
+  useAnchorTravel();
   return (
     <>
       <a className="skip-link" href="#main">

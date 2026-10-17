@@ -1,25 +1,280 @@
-.grid {
+/* ---- Wide: tab list + stage ---- */
+
+.showcase {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-5);
-  margin: 0;
-  padding: 0;
+  grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-7);
+}
+
+@media (min-width: 1100px) {
+  .showcase {
+    gap: var(--space-8);
+  }
+}
+
+.listWrap {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-6));
+}
+
+/* A hairline track with a short gradient segment that slides to the chosen project. */
+.rail {
+  position: relative;
+  padding-left: var(--space-4);
+}
+
+.rail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  left: -0.5px;
+  width: 2px;
+  height: var(--ind-h, 0);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, var(--aurora-2), var(--aurora-1), var(--aurora-3));
+  transform: translateY(var(--ind-y, 0));
+  transition:
+    transform 650ms var(--ease-out),
+    height 650ms var(--ease-out);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-1);
   list-style: none;
 }
 
-.item {
-  min-width: 0;
+.tab {
+  display: grid;
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  text-align: left;
+  transition:
+    background-color 300ms var(--ease-out),
+    box-shadow 300ms var(--ease-out);
 }
 
-@media (min-width: 800px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-6);
+.tab:hover {
+  background: var(--color-bg-alt);
+}
+
+.tab[aria-selected='true'] {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.tabPeriod {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-muted);
+}
+
+.tabName {
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--color-ink-muted);
+  text-wrap: balance;
+  transition: color 300ms var(--ease-out);
+}
+
+.tab:hover .tabName {
+  color: var(--color-ink-soft);
+}
+
+.tab[aria-selected='true'] .tabName {
+  color: var(--color-ink);
+}
+
+/* The stage card, topped with a hairline of the living colour. */
+.stage {
+  overflow: hidden;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(90deg, var(--aurora-2), var(--aurora-1), var(--aurora-3), var(--aurora-4)) top / 100% 2px no-repeat,
+    var(--color-surface);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--duration) var(--ease-out);
+}
+
+.stage[data-spot='on'],
+.stage:focus-within {
+  box-shadow: var(--shadow-card-hover);
+}
+
+@media (min-width: 1100px) {
+  .stage {
+    padding: var(--space-7);
+  }
+}
+
+/*
+ * Every case study shares one grid cell, so the stage keeps the height of the longest.
+ * The outgoing one recedes in depth toward its place in the list (up for earlier, down for later);
+ * the incoming one arrives from the opposite side a beat later.
+ */
+.panels {
+  display: grid;
+  perspective: 1600px;
+}
+
+.panel {
+  --case-delay: 240ms;
+  grid-area: 1 / 1;
+  display: grid;
+  min-width: 0;
+  transition:
+    opacity 420ms var(--ease-out),
+    transform 850ms var(--ease-out),
+    filter 420ms var(--ease-out),
+    visibility 0s linear 850ms;
+}
+
+.panel[data-state='before'],
+.panel[data-state='after'] {
+  opacity: 0;
+  filter: blur(10px);
+  visibility: hidden;
+}
+
+.panel[data-state='before'] {
+  transform: translate3d(0, -40px, -160px) rotateX(9deg);
+}
+
+.panel[data-state='after'] {
+  transform: translate3d(0, 56px, -160px) rotateX(-9deg);
+}
+
+.panel[data-state='active'] {
+  transition-delay: 140ms, 140ms, 140ms, 0s;
+}
+
+/* ---- Narrow: swipeable row ---- */
+
+.carousel {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.track {
+  position: relative;
+  display: grid;
+  grid-auto-columns: min(86%, 28rem);
+  grid-auto-flow: column;
+  gap: var(--space-4);
+  margin-inline: calc(-1 * var(--gutter));
+  padding: var(--space-2) var(--gutter) var(--space-5);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+  list-style: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  display: grid;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.card {
+  display: grid;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(90deg, var(--aurora-2), var(--aurora-1), var(--aurora-3), var(--aurora-4)) top / 100% 2px no-repeat,
+    var(--color-surface);
+  box-shadow: var(--shadow-card);
+  transition:
+    opacity 500ms var(--ease-out),
+    transform 600ms var(--ease-out);
+}
+
+.slide:not([data-current]) .card {
+  opacity: 0.6;
+  transform: scale(0.97);
+}
+
+.pager {
+  display: flex;
+  justify-content: center;
+}
+
+.pip {
+  display: grid;
+  place-items: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+}
+
+.pipBar {
+  width: 0.5rem;
+  height: 0.375rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-border-strong);
+  transition:
+    width 500ms var(--ease-out),
+    background-color 300ms var(--ease-out);
+}
+
+.pip:hover .pipBar {
+  background-color: var(--color-ink-muted);
+}
+
+.pip[aria-current] .pipBar {
+  width: 1.75rem;
+  background: linear-gradient(90deg, var(--aurora-2), var(--aurora-1), var(--aurora-3));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indicator,
+  .tab,
+  .tabName,
+  .panel,
+  .card,
+  .pipBar {
+    transition: none;
   }
 
-  /* The featured card spans the row; so does a last card left alone on its row. */
-  .featured,
-  .item:last-child:nth-child(even) {
-    grid-column: 1 / -1;
+  .panel[data-state='before'],
+  .panel[data-state='after'] {
+    transform: none;
+    filter: none;
+  }
+
+  .slide:not([data-current]) .card {
+    transform: none;
+  }
+
+  .track {
+    scroll-behavior: auto;
   }
 }

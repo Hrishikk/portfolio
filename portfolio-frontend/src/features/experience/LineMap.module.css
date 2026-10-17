@@ -3,6 +3,9 @@
   --flag-h: 3.6rem;
   --marker-row: 2.75rem;
   --track-h: 4px;
+  --train-h: 2.6rem;
+  /* The line runs on past the last station so a train parked there has rail under its nose. */
+  --terminus: calc(var(--train-h) * 124 / 42 / 2 + 10px);
   /* Flag row + the station's flex gap + half the marker row = the dots' centre line. */
   --track-top: calc(var(--flag-h) + var(--space-2) + var(--marker-row) / 2);
   display: grid;
@@ -34,7 +37,7 @@
   position: absolute;
   top: calc(var(--track-top) - var(--track-h) / 2);
   left: calc(100% / (var(--total) * 2));
-  right: calc(100% / (var(--total) * 2));
+  right: calc(100% / (var(--total) * 2) - var(--terminus));
   height: var(--track-h);
   overflow: hidden;
   border-radius: var(--radius-pill);
@@ -47,6 +50,25 @@
 
 .in .track {
   transform: scaleX(1);
+}
+
+/* Buffer stop at the end of the line; appears once the track has drawn in. */
+.stations::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--track-top) - 9px);
+  right: calc(100% / (var(--total) * 2) - var(--terminus) - 3px);
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--aurora-4);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--aurora-4) 25%, transparent);
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out) 1500ms;
+}
+
+.in .stations::after {
+  opacity: 1;
 }
 
 /* A light travels along the line toward the current station: the career is still moving. */
@@ -72,7 +94,6 @@
 /* The train: drives in from the depot on first view, then runs to whichever station is selected.
    Its wheels sit on the rail; it faces the way it last travelled. */
 .train {
-  --train-h: 2.6rem;
   position: absolute;
   z-index: 3;
   top: calc(var(--track-top) - var(--track-h) / 2 - var(--train-h) * 0.943);

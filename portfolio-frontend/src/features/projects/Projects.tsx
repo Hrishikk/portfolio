@@ -1,27 +1,17 @@
-import { projects } from '@/content';
-import { Reveal, Section } from '@/components/ui';
+import { Section } from '@/components/ui';
 import { ui } from '@/i18n/ui';
-import { ProjectCard } from './ProjectCard';
-import styles from './Projects.module.css';
+import { useMediaQuery } from './useMediaQuery';
+import { ProjectShowcase } from './ProjectShowcase';
+import { ProjectCarousel } from './ProjectCarousel';
 
-const STAGGER_MS = 130;
+const WIDE = '(min-width: 800px)';
 
-/** Featured projects as story cards; the first one spans the full width. */
+/** Selected work as interactive case studies: tabs and a stage when wide, a swipeable row when narrow. */
 export function Projects() {
+  const wide = useMediaQuery(WIDE);
   return (
     <Section id="projects" title={ui.sections.projects.title}>
-      <ul className={styles.grid}>
-        {projects.map((project, index) => (
-          <Reveal
-            as="li"
-            key={project.id}
-            delay={index * STAGGER_MS}
-            className={`${styles.item} ${index === 0 ? styles.featured : ''}`}
-          >
-            <ProjectCard project={project} featured={index === 0} />
-          </Reveal>
-        ))}
-      </ul>
+      {wide ? <ProjectShowcase /> : <ProjectCarousel />}
     </Section>
   );
 }

@@ -34,6 +34,23 @@
   --aurora-5: #fdba74;
   --aurora-opacity: 1;
 
+  /*
+   * Washes: the aurora palette diluted to an ambient glow behind sections (see Section).
+   * Strong = the section's main glow, soft = its drifting companion. Never behind text at full strength.
+   */
+  --wash-strong: 10%;
+  --wash-soft: 6%;
+  --wash-indigo: color-mix(in srgb, var(--aurora-1) var(--wash-strong), transparent);
+  --wash-cyan: color-mix(in srgb, var(--aurora-2) var(--wash-strong), transparent);
+  --wash-violet: color-mix(in srgb, var(--aurora-3) var(--wash-strong), transparent);
+  --wash-rose: color-mix(in srgb, var(--aurora-4) var(--wash-strong), transparent);
+  --wash-peach: color-mix(in srgb, var(--aurora-5) calc(var(--wash-strong) + 5%), transparent);
+  --wash-indigo-soft: color-mix(in srgb, var(--aurora-1) var(--wash-soft), transparent);
+  --wash-cyan-soft: color-mix(in srgb, var(--aurora-2) var(--wash-soft), transparent);
+  --wash-violet-soft: color-mix(in srgb, var(--aurora-3) var(--wash-soft), transparent);
+  --wash-rose-soft: color-mix(in srgb, var(--aurora-4) var(--wash-soft), transparent);
+  --wash-seam: color-mix(in srgb, var(--color-border-strong) 70%, var(--aurora-1));
+
   /* Typography */
   --font-display: 'Geist', 'Noto Sans JP', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Geist', 'Noto Sans JP', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -112,6 +129,10 @@
   --aurora-4: #be185d;
   --aurora-5: #b45309;
   --aurora-opacity: 0.85;
+
+  /* The dark aurora hues are deeper, so they need a little more to read on #07080f. */
+  --wash-strong: 18%;
+  --wash-soft: 12%;
 
   --shadow-card: 0 1px 1px rgb(0 0 0 / 0.3), 0 12px 28px -12px rgb(0 0 0 / 0.6);
   --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.35), 0 22px 44px -14px rgb(0 0 0 / 0.75);
