@@ -5,11 +5,26 @@ import { useInView } from '@/hooks/useInView';
 import { Reveal } from '../Reveal/Reveal';
 import styles from './Section.module.css';
 
+type Glow = 'indigo' | 'cyan' | 'violet' | 'rose' | 'peach' | 'none';
+
+/* Each section gets its own soft wash so the page never reads as one flat run. Contact carries the aurora band. */
+const defaultGlow: Record<SectionId, Glow> = {
+  home: 'none',
+  about: 'indigo',
+  experience: 'cyan',
+  projects: 'violet',
+  skills: 'rose',
+  certifications: 'peach',
+  contact: 'none',
+};
+
 interface SectionProps {
   id: SectionId;
   title: Localized;
   lead?: Localized;
   tone?: 'default' | 'alt';
+  /** Ambient colour wash behind the content; defaults by section id. */
+  glow?: Glow;
   /** Decorative layer drawn behind the section content (full-bleed). */
   backdrop?: ReactNode;
   className?: string;
@@ -17,13 +32,14 @@ interface SectionProps {
 }
 
 /** Standard page section: title, optional lead, then content. */
-export function Section({ id, title, lead, tone = 'default', backdrop, className = '', children }: SectionProps) {
+export function Section({ id, title, lead, tone = 'default', glow = defaultGlow[id], backdrop, className = '', children }: SectionProps) {
   const { t } = useLanguage();
   const headingId = `${id}-heading`;
   // The header (never clipped) is what's observed; the title's mask lives on an inner span.
   const { ref: headerRef, inView } = useInView<HTMLElement>();
   return (
     <section id={id} aria-labelledby={headingId} className={`${styles.section} ${tone === 'alt' ? styles.alt : ''} ${className}`}>
+      {glow !== 'none' && <div className={styles.wash} data-glow={glow} aria-hidden="true" />}
       {backdrop}
       <div className={styles.inner}>
         <header ref={headerRef} className={`${styles.header} ${inView ? styles.headerIn : ''}`}>

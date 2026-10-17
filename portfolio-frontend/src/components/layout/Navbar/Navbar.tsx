@@ -2,10 +2,12 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProp
 import { Monogram } from '@/components/ui';
 import { navItems } from '@/content';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { TRAVEL_END, TRAVEL_START, type TravelStartDetail } from '@/hooks/useAnchorTravel';
 import { ui } from '@/i18n/ui';
 import { useLanguage } from '@/i18n/useLanguage';
 import { useTheme } from '@/theme/useTheme';
 import type { Localized, SectionId } from '@/types/content';
+import { TravelBeam } from '../TravelBeam/TravelBeam';
 import { MenuIcon, MoonIcon, SunIcon } from './icons';
 import styles from './Navbar.module.css';
 
@@ -29,6 +31,25 @@ function useScrolled(threshold = 8): boolean {
     return () => window.removeEventListener('scroll', onScroll);
   }, [threshold]);
   return scrolled;
+}
+
+/** The section an in-page trip is heading to, so the pill moves on click instead of trailing the scroll-spy. */
+function useTravelTarget(): SectionId | null {
+  const [target, setTarget] = useState<SectionId | null>(null);
+  useEffect(() => {
+    const onStart = (e: Event) => {
+      const { id } = (e as CustomEvent<TravelStartDetail>).detail;
+      setTarget(SECTION_IDS.includes(id as SectionId) ? (id as SectionId) : null);
+    };
+    const onEnd = () => setTarget(null);
+    window.addEventListener(TRAVEL_START, onStart);
+    window.addEventListener(TRAVEL_END, onEnd);
+    return () => {
+      window.removeEventListener(TRAVEL_START, onStart);
+      window.removeEventListener(TRAVEL_END, onEnd);
+    };
+  }, []);
+  return target;
 }
 
 /** Measures the active link so the sliding pill can sit behind it; re-measures on resize and language change. */
@@ -60,7 +81,9 @@ function useIndicator(active: SectionId | null, locale: string) {
 export function Navbar() {
   const { t, locale, toggleLocale } = useLanguage();
   const { theme, toggleTheme } = useTheme();
-  const active = useActiveSection(SECTION_IDS);
+  const spied = useActiveSection(SECTION_IDS);
+  const travelTarget = useTravelTarget();
+  const active = travelTarget ?? spied;
   const scrolled = useScrolled();
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
@@ -149,6 +172,8 @@ export function Navbar() {
           </button>
         </div>
       </div>
+
+      <TravelBeam />
 
       <div id={MENU_ID} className={`${styles.mobileMenu} ${open ? styles.mobileOpen : ''}`} hidden={!open}>
         <nav aria-label={t(copy.mobileNav)}>

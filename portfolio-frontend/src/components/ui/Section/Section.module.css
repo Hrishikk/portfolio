@@ -5,18 +5,24 @@
   overflow-x: clip;
 }
 
+/* The alt tone eases in and out of the page ground instead of switching at a hard edge. */
 .alt {
-  background: var(--color-bg-alt);
+  background: linear-gradient(
+    var(--color-bg),
+    var(--color-bg-alt) min(10rem, 20%),
+    var(--color-bg-alt) max(calc(100% - 10rem), 80%),
+    var(--color-bg)
+  );
 }
 
-/* Hairline that fades out at both ends instead of a hard full-width border. */
+/* Hairline that fades out at both ends, faintly indigo at its centre, instead of a hard full-width border. */
 .alt::before,
 .alt::after {
   content: '';
   position: absolute;
   inset-inline: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border-strong) 20%, var(--color-border-strong) 80%, transparent);
+  background: linear-gradient(90deg, transparent, var(--color-border-strong) 20%, var(--wash-seam), var(--color-border-strong) 80%, transparent);
 }
 
 .alt::before {
@@ -27,7 +33,91 @@
   bottom: 0;
 }
 
+/*
+ * Ambient wash: two pre-blurred radial glows from the aurora palette, placed per section.
+ * The second drifts slowly (transform only). Faded out at top and bottom so sections meet softly.
+ */
+.wash {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+}
+
+.wash::before,
+.wash::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.wash::after {
+  animation: drift 32s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes drift {
+  to {
+    transform: translate3d(-6%, 4%, 0);
+  }
+}
+
+/* About: indigo glow off the top right, violet beneath it. */
+.wash[data-glow='indigo']::before {
+  background: radial-gradient(ellipse 48rem 30rem at 92% 22%, var(--wash-indigo), transparent 70%);
+}
+.wash[data-glow='indigo']::after {
+  background: radial-gradient(ellipse 34rem 24rem at 70% 60%, var(--wash-violet-soft), transparent 70%);
+}
+
+/* Experience: cyan pooling under the lower left, indigo answering on the right. */
+.wash[data-glow='cyan']::before {
+  background: radial-gradient(ellipse 52rem 32rem at 8% 78%, var(--wash-cyan), transparent 70%);
+}
+.wash[data-glow='cyan']::after {
+  background: radial-gradient(ellipse 40rem 28rem at 88% 35%, var(--wash-indigo-soft), transparent 70%);
+}
+
+/* Selected work: violet from the left edge, indigo low on the right. */
+.wash[data-glow='violet']::before {
+  background: radial-gradient(ellipse 46rem 30rem at 4% 30%, var(--wash-violet), transparent 70%);
+}
+.wash[data-glow='violet']::after {
+  background: radial-gradient(ellipse 40rem 26rem at 96% 78%, var(--wash-indigo-soft), transparent 70%);
+}
+
+/* Skills: violet on the right, warming to rose below it. */
+.wash[data-glow='rose']::before {
+  background: radial-gradient(ellipse 44rem 28rem at 94% 30%, var(--wash-violet), transparent 70%);
+}
+.wash[data-glow='rose']::after {
+  background: radial-gradient(ellipse 36rem 24rem at 78% 78%, var(--wash-rose-soft), transparent 70%);
+}
+
+/* Certifications: a peach hint on the left, rose drifting through. */
+.wash[data-glow='peach']::before {
+  background: radial-gradient(ellipse 46rem 28rem at 6% 35%, var(--wash-peach), transparent 70%);
+}
+.wash[data-glow='peach']::after {
+  background: radial-gradient(ellipse 38rem 24rem at 30% 80%, var(--wash-rose-soft), transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wash::after {
+    animation: none;
+  }
+}
+
+@media print {
+  .wash {
+    display: none;
+  }
+}
+
+/* Positioned so the content paints above the wash without creating a new stacking context. */
 .inner {
+  position: relative;
   width: min(100% - 2 * var(--gutter), var(--container));
   margin-inline: auto;
 }
@@ -88,6 +178,10 @@
 }
 
 @media (max-width: 640px) {
+  /* On phones the glows sit behind the text column rather than in the gutters, so they step back. */
+  .wash {
+    opacity: 0.7;
+  }
   .section {
     padding-block: var(--space-9) var(--space-8);
   }

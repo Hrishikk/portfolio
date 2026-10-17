@@ -1,0 +1,31 @@
+/* Progress is a 0–1 custom property set per frame on this element only; the gradient stays fixed and is revealed. */
+.beam {
+  position: absolute;
+  inset: auto 0 -1px 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--aurora-2), var(--aurora-1), var(--aurora-3), var(--aurora-4));
+  clip-path: inset(0 calc((1 - var(--beam, 0)) * 100%) 0 0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.beam[data-state='travelling'] {
+  opacity: 1;
+}
+
+/* On arrival the full beam lingers for a beat, then dissolves. */
+.beam[data-state='done'] {
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out) 180ms;
+}
+
+/* Sections receive programmatic focus on arrival (for screen readers); they are not controls, so no ring. */
+:global(section[tabindex='-1']:focus) {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam {
+    display: none;
+  }
+}
