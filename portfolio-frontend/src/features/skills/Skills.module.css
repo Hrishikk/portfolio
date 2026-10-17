@@ -36,14 +36,9 @@
   padding: var(--space-5);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  transition: transform var(--duration) var(--ease-out), box-shadow var(--duration) var(--ease-out);
-}
-
-.card:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--duration) var(--ease-out);
 }
 
 
@@ -65,7 +60,6 @@
 .subLabel {
   margin: var(--space-2) 0 0;
   font-size: var(--text-xs);
-  letter-spacing: 0.04em;
   color: var(--color-ink-muted);
 }
 
@@ -112,7 +106,7 @@
   height: 100%;
   width: calc(var(--fill) * 100%);
   border-radius: inherit;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--aurora-3));
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 900ms var(--ease-out) var(--delay, 0ms);
@@ -141,7 +135,4 @@
     transform: none;
   }
 
-  .card:hover {
-    transform: none;
-  }
 }

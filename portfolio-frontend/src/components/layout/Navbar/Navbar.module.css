@@ -1,6 +1,6 @@
 .header {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  inset: 0 0 auto 0;
   z-index: 50;
   height: var(--nav-height);
   border-bottom: 1px solid transparent;
@@ -11,10 +11,10 @@
 }
 
 .scrolled {
-  background: color-mix(in srgb, var(--color-bg) 82%, transparent);
-  border-bottom-color: var(--color-border);
-  -webkit-backdrop-filter: saturate(140%) blur(12px);
-  backdrop-filter: saturate(140%) blur(12px);
+  background: color-mix(in srgb, var(--color-bg) 72%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--color-border) 80%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
 }
 
 .menuOpen {
@@ -42,9 +42,9 @@
 
 .wordmark {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--text-lg);
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  font-size: var(--text-base);
+  letter-spacing: -0.015em;
   white-space: nowrap;
 }
 
@@ -54,16 +54,49 @@
 }
 
 .list {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-1);
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--color-border-strong) 60%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   list-style: none;
+}
+
+/* Sliding pill behind the active link; position is measured in Navbar.tsx. */
+.indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: var(--pill-w, 0);
+  translate: var(--pill-x, 0) 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  box-shadow: 0 1px 2px rgb(11 13 26 / 0.08), 0 4px 12px -4px rgb(50 50 93 / 0.18);
+  opacity: var(--pill-o, 0);
+  transition:
+    translate 500ms var(--ease-out),
+    width 500ms var(--ease-out),
+    opacity 300ms var(--ease-out);
+  pointer-events: none;
+}
+
+:root[data-theme='dark'] .indicator {
+  background: var(--color-surface-raised);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 4px 12px -4px rgb(0 0 0 / 0.6);
 }
 
 .link {
   position: relative;
+  z-index: 1;
   display: inline-block;
-  padding: var(--space-2) var(--space-3);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-pill);
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--color-ink-soft);
@@ -72,30 +105,12 @@
   transition: color 160ms var(--ease-out);
 }
 
-.link::after {
-  content: '';
-  position: absolute;
-  left: var(--space-3);
-  right: var(--space-3);
-  bottom: 2px;
-  height: 2px;
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--duration) var(--ease-out);
-}
-
 .link:hover {
   color: var(--color-ink);
 }
 
 .link.active {
   color: var(--color-ink);
-}
-
-.link.active::after,
-.link:hover::after {
-  transform: scaleX(1);
 }
 
 .actions {
@@ -111,9 +126,11 @@
   place-items: center;
   min-width: 44px;
   height: 40px;
-  border: 1.5px solid var(--color-border-strong);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
+  border: 1px solid color-mix(in srgb, var(--color-border-strong) 60%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   color: var(--color-ink);
   transition:
     transform 160ms var(--ease-out),
@@ -129,7 +146,7 @@
 
 .langButton:hover,
 .iconButton:hover {
-  transform: translate(-1px, -1px);
+  background: var(--color-surface);
   box-shadow: var(--shadow-card);
 }
 
@@ -167,7 +184,8 @@
   border-bottom: 1px dashed var(--color-border);
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: -0.03em;
   text-decoration: none;
 }
 
@@ -219,9 +237,5 @@
   }
   .link {
     padding-inline: var(--space-2);
-  }
-  .link::after {
-    left: var(--space-2);
-    right: var(--space-2);
   }
 }

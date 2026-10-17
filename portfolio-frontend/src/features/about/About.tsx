@@ -3,28 +3,32 @@ import { profile, strengths } from '@/content';
 import { ui } from '@/i18n/ui';
 import { useLanguage } from '@/i18n/useLanguage';
 import { GlanceCard } from './GlanceCard';
+import { ScrollLit } from './ScrollLit';
 import { StrengthCard } from './StrengthCard';
 import styles from './About.module.css';
 
-/** About section: summary, core development areas and an at-a-glance card. */
+/** About section: scroll-lit opening statement, summary, at-a-glance card and core development areas. */
 export function About() {
   const { tl } = useLanguage();
+  const [opening, ...rest] = tl(profile.summary);
   return (
-    <Section id="about" eyebrow={ui.sections.about.eyebrow} title={ui.sections.about.title}>
+    <Section id="about" title={ui.sections.about.title}>
+      <ScrollLit text={opening} />
+
       <div className={styles.layout}>
-        <Reveal className={styles.summary}>
-          {tl(profile.summary).map((paragraph) => (
+        <Reveal variant="swingLeft" className={styles.summary}>
+          {rest.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </Reveal>
-        <Reveal delay={120} className={styles.side}>
+        <Reveal variant="swingRight" delay={120} className={styles.side}>
           <GlanceCard />
         </Reveal>
       </div>
 
       <ul className={styles.strengths}>
         {strengths.map((strength, i) => (
-          <Reveal as="li" key={strength.id} delay={i * 100}>
+          <Reveal as="li" key={strength.id} delay={i * 140} className={styles.strengthCell}>
             <StrengthCard strength={strength} />
           </Reveal>
         ))}

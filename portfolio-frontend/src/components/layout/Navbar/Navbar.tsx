@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { Monogram } from '@/components/ui';
 import { navItems } from '@/content';
 import { useActiveSection } from '@/hooks/useActiveSection';
@@ -9,7 +9,8 @@ import type { Localized, SectionId } from '@/types/content';
 import { MenuIcon, MoonIcon, SunIcon } from './icons';
 import styles from './Navbar.module.css';
 
-const SECTION_IDS: SectionId[] = navItems.map((item) => item.id);
+/** The hero is observed too, so scrolling back to the top clears the active link. */
+const SECTION_IDS: SectionId[] = ['home', ...navItems.map((item) => item.id)];
 const MENU_ID = 'mobile-menu';
 const DESKTOP_QUERY = '(min-width: 900px)';
 
@@ -30,14 +31,40 @@ function useScrolled(threshold = 8): boolean {
   return scrolled;
 }
 
-/** Sticky top bar with scroll-spy links, language + theme toggles and a mobile menu. */
+/** Measures the active link so the sliding pill can sit behind it; re-measures on resize and language change. */
+function useIndicator(active: SectionId | null, locale: string) {
+  const listRef = useRef<HTMLUListElement | null>(null);
+  const [style, setStyle] = useState<CSSProperties>({});
+
+  useLayoutEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const measure = () => {
+      const link = active ? list.querySelector<HTMLElement>(`a[href="#${active}"]`) : null;
+      setStyle(
+        link
+          ? ({ '--pill-x': `${link.offsetLeft}px`, '--pill-w': `${link.offsetWidth}px`, '--pill-o': 1 } as CSSProperties)
+          : ({ '--pill-o': 0 } as CSSProperties),
+      );
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, [active, locale]);
+
+  return { listRef, style };
+}
+
+/** Fixed top bar with scroll-spy links, language + theme toggles and a mobile menu. */
 export function Navbar() {
-  const { t, toggleLocale } = useLanguage();
+  const { t, locale, toggleLocale } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const active = useActiveSection(SECTION_IDS);
   const scrolled = useScrolled();
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
+  const { listRef, style: pillStyle } = useIndicator(active, locale);
 
   // Escape to close, lock body scroll, and auto-close when resized to desktop.
   useEffect(() => {
@@ -86,7 +113,10 @@ export function Navbar() {
         </a>
 
         <nav className={styles.desktopNav} aria-label={t(copy.mainNav)}>
-          <ul className={styles.list}>{links('desktop')}</ul>
+          <ul ref={listRef} className={styles.list} style={pillStyle}>
+            <li className={styles.indicator} aria-hidden="true" />
+            {links('desktop')}
+          </ul>
         </nav>
 
         <div className={styles.actions}>

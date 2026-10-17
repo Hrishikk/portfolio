@@ -12,20 +12,20 @@ export function Certifications() {
     <Section
       id="certifications"
       tone="alt"
-      eyebrow={ui.sections.certifications.eyebrow}
+     
       title={ui.sections.certifications.title}
     >
       <h3 className={styles.groupHeading}>{t(copy.certifications)}</h3>
       <ul className={styles.certGrid}>
         {certifications.map((cert, i) => (
-          <Reveal as="li" key={cert.id} delay={i * 90} className={styles.cell}>
+          <Reveal as="li" key={cert.id} variant="flip" delay={i * 140} className={styles.cell}>
             <CertificateCard cert={cert} />
           </Reveal>
         ))}
       </ul>
 
       <div className={styles.lower}>
-        <Reveal as="article" className={styles.panel}>
+        <Reveal as="article" variant="flip" delay={200} className={styles.panel}>
           <h3 className={styles.panelTitle}>{t(ui.labels.education)}</h3>
           <p className={styles.degree}>{t(education.degree)}</p>
           <p className={styles.school}>{education.school}</p>

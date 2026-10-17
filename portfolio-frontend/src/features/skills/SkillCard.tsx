@@ -1,6 +1,7 @@
 import type { SkillGroup } from '@/types/content';
 import { useLanguage } from '@/i18n/useLanguage';
 import { useInView } from '@/hooks/useInView';
+import { useSpotlight } from '@/hooks/useSpotlight';
 import { Tag } from '@/components/ui';
 import { SkillMeter } from './SkillMeter';
 import { copy } from './copy';
@@ -14,12 +15,17 @@ interface SkillCardProps {
 export function SkillCard({ group }: SkillCardProps) {
   const { t } = useLanguage();
   const { ref, inView } = useInView<HTMLElement>({ threshold: 0.3 });
+  const spotRef = useSpotlight<HTMLElement>({ tilt: 3 });
+  const setRefs = (node: HTMLElement | null) => {
+    ref.current = node;
+    spotRef.current = node;
+  };
   const measured = group.items.filter((item) => item.months !== undefined);
   const tagged = group.items.filter((item) => item.months === undefined);
   const titleId = `skill-${group.id}-title`;
 
   return (
-    <article ref={ref} className={styles.card} aria-labelledby={titleId}>
+    <article ref={setRefs} className={`${styles.card} spotlight`} aria-labelledby={titleId}>
       <h3 id={titleId} className={styles.cardTitle}>
         {t(group.title)}
       </h3>

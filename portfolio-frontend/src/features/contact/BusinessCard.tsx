@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 import { Monogram } from '@/components/ui';
 import { profile } from '@/content';
+import { useSpotlight } from '@/hooks/useSpotlight';
 import { useLanguage } from '@/i18n/useLanguage';
 import type { ContactLink } from '@/types/content';
 import { copy } from './copy';
@@ -18,9 +19,10 @@ const isExternal = (href?: string) => Boolean(href && /^https?:/.test(href));
 /** Business card with name, role and contact details. */
 export function BusinessCard() {
   const { t, locale } = useLanguage();
+  const spotRef = useSpotlight<HTMLElement>({ tilt: 7 });
 
   return (
-    <article className={styles.card} aria-label={t(copy.cardLabel)}>
+    <article ref={spotRef} className={`${styles.card} spotlight`} aria-label={t(copy.cardLabel)}>
       <div className={styles.cardTop}>
         <div>
           {locale === 'ja' && (

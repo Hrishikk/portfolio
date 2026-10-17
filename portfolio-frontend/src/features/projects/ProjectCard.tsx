@@ -1,5 +1,6 @@
 import type { Project } from '@/types/content';
 import { Tag } from '@/components/ui';
+import { useSpotlight } from '@/hooks/useSpotlight';
 import { useLanguage } from '@/i18n/useLanguage';
 import { ui } from '@/i18n/ui';
 import styles from './ProjectCard.module.css';
@@ -21,10 +22,12 @@ function CheckIcon() {
 export function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const { t, tl } = useLanguage();
   const headingId = `project-${project.id}`;
+  const spotRef = useSpotlight<HTMLElement>({ tilt: featured ? 1.2 : 2.5 });
 
   return (
     <article
-      className={`${styles.card} ${featured ? styles.featured : ''}`}
+      ref={spotRef}
+      className={`${styles.card} ${featured ? styles.featured : ''} spotlight`}
       aria-labelledby={headingId}
     >
 

@@ -21,7 +21,7 @@ export function Experience() {
     <Section
       id="experience"
       tone="alt"
-      eyebrow={ui.sections.experience.eyebrow}
+     
       title={ui.sections.experience.title}
       lead={copy.lead}
     >
